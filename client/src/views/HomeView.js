@@ -1,7 +1,11 @@
+import { Container, Typography } from '@mui/material';
+
 const HomeView = () => {
   return (
-    <div>
-      <h1>Homepage</h1>
+    <div id="HomeView">
+      <Container>
+        <Typography variant="h1">Homepage</Typography>
+      </Container>
     </div>
   )
 }

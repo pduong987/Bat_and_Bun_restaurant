@@ -1,0 +1,91 @@
+/* Colours */
+$primary-colour: #3162ae;
+$primary-dark-colour: #00397e;
+$primary-light-colour: #698fe0;
+$black-colour: #3c3c3c;
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  color: $black-colour;
+}
+
+main {
+  min-height: 85vh;
+}
+
+/* HEADER */
+header {
+  .MuiToolbar-root {
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+      display: flex;
+      align-items: center;
+
+      > li:hover {
+        background-color: transparent;
+      }
+      
+      .logo {
+        margin-right: 10px;
+        max-width: 150px;
+        height: auto;
+      }
+    }
+  }
+}
+
+/* Main Menu */
+.main-menu {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: .9em;
+  letter-spacing: .05em;
+
+  a {
+    margin: 0 20px;
+  }
+
+  a,
+  a:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+/* Menu Overlay */
+.menu-overlay {
+  .close-icon {
+    float: right;
+    height: 66px;
+    width: 66px;
+    margin-right: 10px;
+    cursor: pointer;
+    z-index: 99;
+  }
+
+  > ul > a {
+    text-align: center;
+    padding: 1.15em 0;
+
+    > div > span {
+      font-size: 1.15em;
+    }
+  }
+}
+
+/* FOOTER */
+footer {
+  background-color: $black-colour;
+  color: #fff;
+  text-align: center;
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
