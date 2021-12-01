@@ -124,6 +124,16 @@ section {
   padding: 4em 0;
 }
 
+/* Home View: Hero Image */
+#hero-image {
+  background-color: $black-colour;
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 30vh;
+}
+
 /* Home View: Partner Links */
 #partner-links {
   width: 100%;
