@@ -204,6 +204,32 @@ section {
   }
 }
 
+/* About View */
+#AboutView {
+  .MuiContainer-root {
+    padding: 4em 0;
+    max-width: 80%;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  p {
+    font-size: .9em;
+    max-width: 80ch;
+    margin: 2em auto;
+    line-height: 1.4em;
+  }
+
+  .about-img {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
 /* FOOTER */
 footer {
   background-color: $black-colour;
@@ -233,6 +259,19 @@ footer {
 
     ul {
       margin-bottom: 0;
+    }
+  }
+
+  /* About View */
+  #AboutView {
+    .about-owner {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+
+      p {
+        max-width: 35%;
+      }
     }
   }
 }
