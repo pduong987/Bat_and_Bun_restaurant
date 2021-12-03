@@ -177,6 +177,33 @@ section {
   }
 }
 
+/* Home View: Business Info */
+#business-info {
+  background-color: rgba(60, 60, 60, .8);
+
+  h3 {
+    font-size: 1.2em;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: .05em;
+    color: #fff;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 3em;
+
+    > li {
+      color: #fff;
+      letter-spacing: .03em;
+      margin-bottom: .35em;
+    }
+  }
+}
+
 /* FOOTER */
 footer {
   background-color: $black-colour;
@@ -193,6 +220,19 @@ footer {
   #partner-links {
     .MuiContainer-root {
       flex-direction: row;
+    }
+  }
+
+  /* Home View: Business Info */
+  #business-info {
+    .MuiContainer-root {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-start;
+    }
+
+    ul {
+      margin-bottom: 0;
     }
   }
 }
