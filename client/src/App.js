@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import HomeView from './views/HomeView';
+import AboutView from './views/AboutView';
 
 // For website theme
 const theme = createTheme({
@@ -29,6 +30,7 @@ function App() {
         <main>
           <Routes>
             <Route exact path='/' element={<HomeView />} />
+            <Route exact path='/about' element={<AboutView />} />
           </Routes>
         </main>
         <Footer />
