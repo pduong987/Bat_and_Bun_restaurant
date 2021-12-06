@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+import HomeView from './views/HomeView';
+
+// For website theme
+const theme = createTheme({
+  palette: {
+    primary: {
+    main: '#3162ae',
+    light: '#698fe0',
+    dark: '#00397e',
+    },
+  },
+  typography: {
+    color: '#3c3c3c',
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Header />
+        <main>
+          <Routes>
+            <Route exact path='/' element={<HomeView />} />
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
