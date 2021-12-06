@@ -4,4 +4,4 @@ async function databaseConnector(databaseURL){
 await mongoose.connect(databaseURL);
 }
 
-export default databaseConnector
+export default databaseConnector;
