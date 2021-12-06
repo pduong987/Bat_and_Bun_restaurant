@@ -1,7 +1,7 @@
-import { Container, Typography } from '@mui/material';
-import BusinessInfo from '../components/HomeView/BusinessInfo';
 import HeroBanner from '../components/HomeView/HeroBanner';
+import MenuItemList from '../components/HomeView/MenuItemList';
 import PartnerLinks from '../components/HomeView/PartnerLinks';
+import BusinessInfo from '../components/HomeView/BusinessInfo';
 
 const HomeView = () => {
   const heroImageUrl = "./img/hero-image.jpg";
@@ -9,9 +9,7 @@ const HomeView = () => {
   return (
     <div id="HomeView">
       <HeroBanner imgUrl={heroImageUrl} />
-      <Container>
-        <Typography variant="h1" sx={{ fontSize: '3em' }}>Homepage</Typography>
-      </Container>
+      <MenuItemList />
       <PartnerLinks />
       <BusinessInfo />
     </div>
