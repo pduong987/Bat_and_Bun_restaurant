@@ -134,6 +134,106 @@ section {
   min-height: 30vh;
 }
 
+/* Home View: Menu Item List */
+#menu-item-list {
+  max-width: 80%;
+  padding: 4em 0;
+
+  .menu-box {
+    padding: 1.5em 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(60, 60, 60, .3);
+      margin-bottom: 3em;
+    }
+  }
+
+  .item-detail-card {
+    margin-bottom: 2.5em;
+
+    .MuiCardContent-root {
+      padding-bottom: 0.35em;
+    }
+
+    .MuiCardActions-root {
+      justify-content: center;
+      flex-direction: column;
+
+      > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+
+        button {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          &.min-btn {
+            color: rgb(250, 140, 140);
+
+            &:hover {
+              background-color: rgb(250, 140, 140);
+              color: #fff;
+            }
+          }
+
+          &.add-btn {
+            color: rgb(94, 170, 128);
+            &:hover {
+              background-color: rgb(94, 170, 128);
+              color: #fff;
+            }
+          }
+
+          svg {
+            width: 1.2rem;
+            height: 1.2rem;
+          }
+        }
+
+        .qty-number {
+          width: 30px;
+          font-size: 1.05em;
+        }
+      }
+
+      .add-to-cart-btn {
+        font-size: .7em;
+      }
+    }
+  }
+
+  h3 {
+    font-size: 2em;
+    margin-bottom: 1.5em;
+  }
+
+  h4 {
+    text-align: center;
+    font-size: 1em;
+  }
+
+  .MuiTypography-body1 {
+    text-align: center;
+    font-weight: 300;
+    font-size: .75em;
+    line-height: 1.05;
+    margin-top: .5em;
+  }
+
+  .MuiTypography-body2 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1em;
+    margin-top: .5em;
+  }
+}
+
 /* Home View: Partner Links */
 #partner-links {
   width: 100%;
@@ -242,6 +342,23 @@ footer {
 }
 
 @media (min-width: 600px) {
+  /* Home View: Menu Item List */
+  #menu-item-list {
+    .item-detail-card {
+      .MuiCardActions-root {
+        > div {
+          .qty-number {
+            width: 50px;
+          }
+        }
+      }
+    }
+
+    .MuiTypography-body1 {
+      font-size: .85em;
+    }
+  }
+
   /* Home View: Partner Links */
   #partner-links {
     .MuiContainer-root {
