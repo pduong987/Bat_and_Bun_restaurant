@@ -1,25 +1,12 @@
-import BingMapsReact from "bingmaps-react";
-import { useMediaQuery } from '@mui/material';
-
 const EmbedMap = () => {
-  const matches = useMediaQuery('(min-width:900px)');
+  const imgUrl = "./img/bat-bun-map.jpg";
+  const handleClick = () => {
+    window.open('https://www.google.com/maps/place/Bat+%2B+Bun/@-33.8833139,151.2161591,17z/data=!3m1!4b1!4m5!3m4!1s0x6b12ae1a50bca6e7:0xfc822401c5e9ca09!8m2!3d-33.8833261!4d151.2184224', '_blank', 'noopener,noreferrer');
+  };
 
   return (
-    <section id="embed-map">
-      <BingMapsReact
-        bingMapsKey={process.env.REACT_APP_BINGMAP_KEY}
-        height={matches ? "500px" : "300px"}
-        mapOptions={{
-          navigationBarMode: "square",
-        }}
-        width="100%"
-        viewOptions={{
-          center: { latitude: -33.883320, longitude: 151.218384 },
-          zoom: 17
-        }}
-        pushPins={[{ center: { latitude: -33.883320, longitude: 151.218384 }, options: { title: "Bat + Bun", color: '#3162ae' } }]}
-      />
-    </section>
+    <div id="embed-map" style={{ backgroundImage: `url(${imgUrl})` }} onClick={handleClick} >
+    </div>
   )
 }
 
