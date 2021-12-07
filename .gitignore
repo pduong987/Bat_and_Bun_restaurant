@@ -10,9 +10,10 @@ node_modules/
 /coverage
 
 # production
-/build
+build/
 
 # misc
+keys/
 .DS_Store
 .env
 .env.local
