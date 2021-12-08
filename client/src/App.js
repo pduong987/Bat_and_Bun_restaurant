@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 
 import HomeView from './views/HomeView';
 import AboutView from './views/AboutView';
+import LoginView from './views/LoginView';
 
 // For website theme
 const theme = createTheme({
@@ -31,6 +32,7 @@ function App() {
           <Routes>
             <Route exact path='/' element={<HomeView />} />
             <Route exact path='/about' element={<AboutView />} />
+            <Route exact path='/admin-login' element={<LoginView />} />
           </Routes>
         </main>
         <Footer />

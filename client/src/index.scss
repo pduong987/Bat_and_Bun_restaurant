@@ -344,6 +344,33 @@ section {
   }
 }
 
+/* Login View */
+#LoginView {
+  .MuiContainer-root {
+    padding: 5em 0;
+    width: 80%;
+    max-width: 500px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .login-form {
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2em;
+    }
+
+    button {
+      margin: 2em auto;
+    }
+  }
+}
+
 /* FOOTER */
 footer {
   background-color: $black-colour;
