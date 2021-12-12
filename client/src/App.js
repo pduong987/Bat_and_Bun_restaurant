@@ -2,12 +2,16 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { AuthProvider } from './contexts/AuthContext';
+
 import Header from './components/Header';
 import Footer from './components/Footer';
 
 import HomeView from './views/HomeView';
 import AboutView from './views/AboutView';
 import LoginView from './views/LoginView';
+import PrivateRoute from './components/PrivateRoute';
+import DashboardView from './views/DashboardView';
 
 // For website theme
 const theme = createTheme({
@@ -27,15 +31,22 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Header />
-        <main>
-          <Routes>
-            <Route exact path='/' element={<HomeView />} />
-            <Route exact path='/about' element={<AboutView />} />
-            <Route exact path='/admin-login' element={<LoginView />} />
-          </Routes>
-        </main>
-        <Footer />
+        <AuthProvider>
+          <Header />
+          <main>
+            <Routes>
+              <Route exact path='/' element={<HomeView />} />
+              <Route exact path='/about' element={<AboutView />} />
+              <Route exact path='/admin-login' element={<LoginView />} />
+              <Route exact path='/dashboard' element={
+                <PrivateRoute>
+                  <DashboardView />
+                </PrivateRoute>
+              } />
+            </Routes>
+          </main>
+          <Footer />
+        </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>
   );

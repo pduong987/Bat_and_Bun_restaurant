@@ -1,4 +1,5 @@
 import path from 'path';
+import cors from 'cors';
 import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -11,6 +12,8 @@ const HOST = '0.0.0.0';
 const __dirname = path.resolve();
 
 const app = express();
+
+app.use(cors());
 
 databaseConnector(MONGODB_URI).then(() => {
     console.log("Database connected successfully!");
@@ -26,6 +29,22 @@ app.use(express.urlencoded({extended:true}));
 
 // ROUTES
 app.use('/users', userRoutes);
+
+// For testing auth
+app.get('/test', (req, res) => {
+  console.log(req.headers.authorization);
+
+  return res.json({
+    testContent: [
+      {
+        propertyOne: 'Text1'
+      },
+      {
+        propertyOne: 'Text2'
+      }
+    ]
+  });
+});
 
 // PRODUCTION: Serve static build client
 app.use(express.static(path.join(__dirname, '/client/build')));

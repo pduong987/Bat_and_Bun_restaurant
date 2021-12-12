@@ -10,6 +10,7 @@ import {
   MenuItem
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useAuth } from '../contexts/AuthContext';
 
 import RightDrawer from './RightDrawer';
 
@@ -25,6 +26,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 const Header = () => {
   const matches = useMediaQuery('(min-width:600px)');
+  const { currentUser } = useAuth();
   
   // Menu Items
   const menuItems = [
@@ -37,8 +39,8 @@ const Header = () => {
       menuLink: '/about'
     },
     {
-      menuName: 'Admin Log In',
-      menuLink: '/admin-login'
+      menuName: currentUser && currentUser ? 'Dashboard' : 'Admin Log In',
+      menuLink: currentUser && currentUser ? '/dashboard' : '/admin-login'
     },
     {
       menuName: 'Track Order',
