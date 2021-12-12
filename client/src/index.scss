@@ -448,6 +448,43 @@ section {
   }
 }
 
+/* Track Order View */
+#TrackOrderView {
+  .MuiContainer-root {
+    padding: 5em 0;
+    width: 80%;
+    max-width: 500px;
+  }
+
+  p {
+    font-size: .9em;
+    max-width: 80ch;
+    margin: 2em auto;
+    line-height: 1.4em;
+  }
+
+  .tracking-form {
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2em;
+    }
+
+    button {
+      margin: 2em auto;
+    }
+  }
+
+  .cart-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5em;
+  }
+}
+
 /* FOOTER */
 footer {
   background-color: $black-colour;
