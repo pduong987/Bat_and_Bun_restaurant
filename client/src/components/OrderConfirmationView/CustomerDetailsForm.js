@@ -24,6 +24,7 @@ const CustomerDetailsForm = () => {
       setError('');
       setLoading(true);
 
+      console.log(name, phone, email);
       // await placeOrder(name, phone, email, order);
 
       navigate("/thank-you");

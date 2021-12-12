@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-  Container,
   Alert,
   TextField,
   Button
@@ -20,6 +19,7 @@ const TrackingForm = ({ setTrackResult }) => {
       setError('');
       setLoading(true);
 
+      console.log(orderReference, phone);
       // await trackOrder(orderReference, phone);
 
       setTrackResult('test');
