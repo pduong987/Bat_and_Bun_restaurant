@@ -13,6 +13,9 @@ import LoginView from './views/LoginView';
 import PrivateRoute from './components/PrivateRoute';
 import DashboardView from './views/DashboardView';
 
+// For testing display of sub-pages
+import ThankYouView from './views/ThankYouView';
+
 // For website theme
 const theme = createTheme({
   palette: {
@@ -43,6 +46,9 @@ function App() {
                   <DashboardView />
                 </PrivateRoute>
               } />
+
+              {/* For testing display of sub-pages */}
+              <Route exact path='/thank-you' element={<ThankYouView />} />
             </Routes>
           </main>
           <Footer />
