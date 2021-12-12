@@ -74,12 +74,13 @@ const Header = () => {
           }
         </div>
         <div>
-          <MenuItem>
+          <MenuItem disableRipple>
             <IconButton
               size="large"
               edge="end"
               color="inherit"
               disableRipple
+              onClick={e => window.location.href='/cart'}
             >
               <Badge
                 badgeContent={3}

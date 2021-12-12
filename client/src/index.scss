@@ -73,6 +73,7 @@ header {
         margin-right: 10px;
         max-width: 120px;
         height: auto;
+        cursor: pointer;
       }
     }
   }
@@ -367,6 +368,33 @@ section {
 
     button {
       margin: 2em auto;
+    }
+  }
+}
+
+/* Cart View */
+#CartView {
+  .MuiContainer-root {
+    padding: 5em 0;
+    width: 80%;
+    max-width: 500px;
+  }
+
+  .cart-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cart-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    a {
+      margin: 0 1.5em 1.5em 0;
+      text-align: center;
     }
   }
 }
