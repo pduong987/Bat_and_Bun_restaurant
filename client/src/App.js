@@ -15,6 +15,7 @@ import DashboardView from './views/DashboardView';
 
 // For testing display of sub-pages
 import CartView from './views/CartView';
+import OrderConfirmationView from './views/OrderConfirmationView';
 import ThankYouView from './views/ThankYouView';
 
 // For website theme
@@ -50,6 +51,7 @@ function App() {
 
               {/* For testing display of sub-pages */}
               <Route exact path='/cart' element={<CartView />} />
+              <Route exact path='/order-confirmation' element={<OrderConfirmationView />} />
               <Route exact path='/thank-you' element={<ThankYouView />} />
             </Routes>
           </main>
