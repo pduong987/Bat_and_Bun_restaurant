@@ -17,6 +17,7 @@ import DashboardView from './views/DashboardView';
 import CartView from './views/CartView';
 import OrderConfirmationView from './views/OrderConfirmationView';
 import ThankYouView from './views/ThankYouView';
+import TrackOrderView from './views/TrackOrderView';
 
 // For website theme
 const theme = createTheme({
@@ -53,6 +54,7 @@ function App() {
               <Route exact path='/cart' element={<CartView />} />
               <Route exact path='/order-confirmation' element={<OrderConfirmationView />} />
               <Route exact path='/thank-you' element={<ThankYouView />} />
+              <Route exact path='/track-order' element={<TrackOrderView />} />
             </Routes>
           </main>
           <Footer />
