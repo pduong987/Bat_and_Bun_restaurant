@@ -399,6 +399,35 @@ section {
   }
 }
 
+/* Order Confirmation View */
+#OrderConfirmationView {
+  .MuiContainer-root {
+    padding: 5em 0;
+    width: 80%;
+    max-width: 500px;
+  }
+
+  .cart-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .customer-details-form {
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2em;
+    }
+
+    button {
+      margin: 2em auto;
+    }
+  }
+}
+
 /* Thank You View */
 #ThankYouView {
   .MuiContainer-root {
