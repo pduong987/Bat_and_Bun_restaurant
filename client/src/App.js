@@ -14,6 +14,7 @@ import PrivateRoute from './components/PrivateRoute';
 import DashboardView from './views/DashboardView';
 
 // For testing display of sub-pages
+import CartView from './views/CartView';
 import ThankYouView from './views/ThankYouView';
 
 // For website theme
@@ -48,6 +49,7 @@ function App() {
               } />
 
               {/* For testing display of sub-pages */}
+              <Route exact path='/cart' element={<CartView />} />
               <Route exact path='/thank-you' element={<ThankYouView />} />
             </Routes>
           </main>
