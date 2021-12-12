@@ -3,42 +3,40 @@ import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Typography,
+  Alert,
   TextField,
   Button
 } from '@mui/material';
-import axios from 'axios';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
+import { useAuth } from '../contexts/AuthContext';
 import HeroBanner from '../components/HomeView/HeroBanner';
 
 const LoginView = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  let navigate = useNavigate();
+  const { login } = useAuth();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const heroImageUrl = "./img/about-hero-image.jpg";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios.post('/users/login', {
-      email,
-      password
-    }, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(function (response) {
-      const { data } = response;
-      
-      // If login successful, redirect to dashboard
-      if (data.idToken) {
-        navigate('/dashboard');
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    try {
+      setError('');
+      setLoading(true);
+
+      await login(email, password);
+
+      navigate("/dashboard");
+    } catch (err) {
+      setError("Log in failed. Please check your email and password.");
+      console.log(err);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -46,6 +44,10 @@ const LoginView = () => {
       <HeroBanner imgUrl={heroImageUrl} />
       <Container>
         <Typography variant="h1" sx={{ fontSize: '3em' }}>Log In</Typography>
+        
+        {/* Show error */}
+        {error && <Alert severity="error">{error}</Alert>}
+
         <div className="login-form">
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
@@ -74,8 +76,9 @@ const LoginView = () => {
               variant="contained"
               margin="normal"
               endIcon={<KeyboardArrowRightIcon />}
+              disabled={loading}
             >
-              Login
+              Log In
             </Button>
           </form>
         </div>
