@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { AuthProvider } from './contexts/AuthContext';
+import { CartProvider } from './contexts/CartContext';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -40,22 +41,24 @@ function App() {
         <AuthProvider>
           <Header />
           <main>
-            <Routes>
-              <Route exact path='/' element={<HomeView />} />
-              <Route exact path='/about' element={<AboutView />} />
-              <Route exact path='/admin-login' element={<LoginView />} />
-              <Route exact path='/dashboard' element={
-                <PrivateRoute>
-                  <DashboardView />
-                </PrivateRoute>
-              } />
+            <CartProvider>
+              <Routes>
+                <Route exact path='/' element={<HomeView />} />
+                <Route exact path='/about' element={<AboutView />} />
+                <Route exact path='/admin-login' element={<LoginView />} />
+                <Route exact path='/dashboard' element={
+                  <PrivateRoute>
+                    <DashboardView />
+                  </PrivateRoute>
+                } />
 
-              {/* For testing display of sub-pages */}
-              <Route exact path='/cart' element={<CartView />} />
-              <Route exact path='/order-confirmation' element={<OrderConfirmationView />} />
-              <Route exact path='/thank-you' element={<ThankYouView />} />
-              <Route exact path='/track-order' element={<TrackOrderView />} />
-            </Routes>
+                {/* For testing display of sub-pages */}
+                <Route exact path='/cart' element={<CartView />} />
+                <Route exact path='/order-confirmation' element={<OrderConfirmationView />} />
+                <Route exact path='/thank-you' element={<ThankYouView />} />
+                <Route exact path='/track-order' element={<TrackOrderView />} />
+              </Routes>
+            </CartProvider>
           </main>
           <Footer />
         </AuthProvider>
