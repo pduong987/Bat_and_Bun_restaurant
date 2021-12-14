@@ -34,7 +34,8 @@ const Header = () => {
 
   useEffect(() => {
     if (cartItems.length > 1) {
-      cartItems.reduce((prevItem, currItem) => setTotalItems(prevItem.qty + currItem.qty));
+      setTotalItems(0);
+      cartItems.map(item => setTotalItems(t => t + item.qty));
     }
     if (cartItems.length === 1) {
       setTotalItems(cartItems[0].qty);
