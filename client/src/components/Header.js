@@ -33,6 +33,9 @@ const Header = () => {
   const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
+    if (cartItems.length === 0) {
+      setTotalItems(0);
+    }
     if (cartItems.length > 1) {
       setTotalItems(0);
       cartItems.map(item => setTotalItems(t => t + item.qty));
