@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import {
   Button,
+  IconButton,
   Container,
   Table,
   TableBody,
@@ -9,12 +10,17 @@ import {
   TableHead,
   TableRow
 } from '@mui/material';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 import {
   placeholderItems,
   ccyFormat,
   subtotal
 } from '../utils/cartOrderUtils';
-import { CART_REMOVE } from '../reducers/constants';
+import {
+  CART_ADD,
+  CART_REMOVE
+} from '../reducers/constants';
 import { CartContext } from '../contexts/CartContext';
 
 const invoiceTotal = subtotal(placeholderItems);
@@ -30,14 +36,14 @@ const CartTable = () => {
           <TableHead>
             <TableRow>
               <TableCell>Item</TableCell>
-              <TableCell align="right">Qty</TableCell>
+              <TableCell align="center">Qty</TableCell>
               <TableCell align="right">Subtotal</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {cartItems.map((item) => (
               <TableRow key={item.name}>
-                <TableCell>
+                <TableCell colSpan={1}>
                   {item.name}
                   <Button
                     color="error"
@@ -47,7 +53,30 @@ const CartTable = () => {
                     Delete
                   </Button>
                 </TableCell>
-                <TableCell align="right">{item.qty}</TableCell>
+                <TableCell align="center">
+                  {item.qty > 1
+                  ? (
+                      <IconButton
+                        aria-label="reduce quantity"
+                        className="min-btn"
+                        onClick={() => dispatch({type: CART_ADD, payload: {name: item.name, qty: -1}})}
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                    )
+                  : (
+                      <span style={{display: 'inline-block', width: '40px', height: '20px'}}></span>
+                    )
+                  }
+                  <span style={{display: 'inline-block', width: '50px', textAlign: 'center'}}>{item.qty}</span>
+                  <IconButton
+                    aria-label="add quantity"
+                    className="add-btn"
+                    onClick={() => dispatch({type: CART_ADD, payload: {name: item.name, qty: 1}})}
+                  >
+                    <AddIcon />
+                  </IconButton>  
+                </TableCell>
                 <TableCell align="right">${ccyFormat(10.00)}</TableCell>
               </TableRow>
             ))}
