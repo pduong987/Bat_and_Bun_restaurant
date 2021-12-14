@@ -39,28 +39,28 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <AuthProvider>
-          <Header />
-          <main>
-            <CartProvider>
-              <Routes>
-                <Route exact path='/' element={<HomeView />} />
-                <Route exact path='/about' element={<AboutView />} />
-                <Route exact path='/admin-login' element={<LoginView />} />
-                <Route exact path='/dashboard' element={
-                  <PrivateRoute>
-                    <DashboardView />
-                  </PrivateRoute>
-                } />
+          <CartProvider>
+            <Header />
+            <main>
+                <Routes>
+                  <Route exact path='/' element={<HomeView />} />
+                  <Route exact path='/about' element={<AboutView />} />
+                  <Route exact path='/admin-login' element={<LoginView />} />
+                  <Route exact path='/dashboard' element={
+                    <PrivateRoute>
+                      <DashboardView />
+                    </PrivateRoute>
+                  } />
 
-                {/* For testing display of sub-pages */}
-                <Route exact path='/cart' element={<CartView />} />
-                <Route exact path='/order-confirmation' element={<OrderConfirmationView />} />
-                <Route exact path='/thank-you' element={<ThankYouView />} />
-                <Route exact path='/track-order' element={<TrackOrderView />} />
-              </Routes>
-            </CartProvider>
-          </main>
-          <Footer />
+                  {/* For testing display of sub-pages */}
+                  <Route exact path='/cart' element={<CartView />} />
+                  <Route exact path='/order-confirmation' element={<OrderConfirmationView />} />
+                  <Route exact path='/thank-you' element={<ThankYouView />} />
+                  <Route exact path='/track-order' element={<TrackOrderView />} />
+                </Routes>
+            </main>
+            <Footer />
+          </CartProvider>
         </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>

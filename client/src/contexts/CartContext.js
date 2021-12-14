@@ -4,7 +4,10 @@ import { cartReducer } from '../reducers/cartReducers';
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, dispatch] = useReducer(cartReducer, []);
+  const [cartItems, dispatch] = useReducer(cartReducer, [], () => {
+    const localData = localStorage.getItem('cartItems');
+    return localData ? JSON.parse(localData) : [];
+  });
 
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
