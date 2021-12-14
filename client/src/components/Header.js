@@ -1,3 +1,4 @@
+import { useContext, useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import {
   useMediaQuery,
@@ -11,6 +12,7 @@ import {
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useAuth } from '../contexts/AuthContext';
+import { CartContext } from '../contexts/CartContext';
 
 import RightDrawer from './RightDrawer';
 
@@ -27,6 +29,17 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 const Header = () => {
   const matches = useMediaQuery('(min-width:600px)');
   const { currentUser } = useAuth();
+  const { cartItems } = useContext(CartContext);
+  const [totalItems, setTotalItems] = useState(0);
+
+  useEffect(() => {
+    if (cartItems.length > 1) {
+      cartItems.reduce((prevItem, currItem) => setTotalItems(prevItem.qty + currItem.qty));
+    }
+    if (cartItems.length === 1) {
+      setTotalItems(cartItems[0].qty);
+    }
+  }, [cartItems]);
   
   // Menu Items
   const menuItems = [
@@ -83,7 +96,7 @@ const Header = () => {
               onClick={e => window.location.href='/cart'}
             >
               <Badge
-                badgeContent={3}
+                badgeContent={totalItems}
                 color="error"
               >
                 <ShoppingCartIcon />

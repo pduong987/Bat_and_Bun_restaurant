@@ -1,3 +1,5 @@
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Card,
   CardMedia,
@@ -10,7 +12,23 @@ import {
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
+import {
+  CART_ADD
+} from '../../reducers/constants.js';
+import { CartContext } from '../../contexts/CartContext';
+
 const MenuItemDetail = ({ item }) => {
+  const { dispatch } = useContext(CartContext);
+  const [qtyDisplay, setQtyDisplay] = useState(1);
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    dispatch({type: CART_ADD, payload: {name: item.name, qty: qtyDisplay}});
+    
+    // Redirect to Cart View
+    navigate('/cart');
+  };
+
   return (
     <Card
       className="item-detail-card"
@@ -41,13 +59,15 @@ const MenuItemDetail = ({ item }) => {
           <IconButton
             aria-label="reduce quantity"
             className="min-btn"
+            onClick={() => qtyDisplay > 1 && setQtyDisplay(qtyDisplay - 1)}
           >
             <RemoveIcon />
           </IconButton>
-          <span className="qty-number">1</span>
+          <span className="qty-number">{qtyDisplay}</span>
           <IconButton
             aria-label="add quantity"
             className="add-btn"
+            onClick={() => qtyDisplay < 10 && setQtyDisplay(qtyDisplay + 1)}
           >
             <AddIcon />
           </IconButton>
@@ -55,6 +75,7 @@ const MenuItemDetail = ({ item }) => {
         <Button
           variant="contained"
           className="add-to-cart-btn"
+          onClick={handleAddToCart}
         >
           Add to Cart
         </Button>

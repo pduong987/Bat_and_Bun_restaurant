@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import {
   Table,
   TableBody,
@@ -11,10 +12,13 @@ import {
   ccyFormat,
   subtotal
 } from '../utils/cartOrderUtils';
+import { CartContext } from '../contexts/CartContext';
 
 const invoiceTotal = subtotal(placeholderItems);
 
 const CartTable = () => {
+  const { cartItems } = useContext(CartContext);
+
   return (
     <TableContainer className="cart-table">
       <Table sx={{ maxWidth: 900 }} aria-label="cart details">
@@ -26,11 +30,11 @@ const CartTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {placeholderItems.map((row) => (
-            <TableRow key={row.desc}>
-              <TableCell>{row.desc}</TableCell>
-              <TableCell align="right">{row.qty}</TableCell>
-              <TableCell align="right">${ccyFormat(row.price)}</TableCell>
+          {cartItems.map((item) => (
+            <TableRow key={item.name}>
+              <TableCell>{item.name}</TableCell>
+              <TableCell align="right">{item.qty}</TableCell>
+              <TableCell align="right">${ccyFormat(10.00)}</TableCell>
             </TableRow>
           ))}
 
