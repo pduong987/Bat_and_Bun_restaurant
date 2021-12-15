@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches snapshot 1`] = `
+<a
+  className="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 link-icon css-xmlano-MuiButtonBase-root-MuiButton-root-MuiPaper-root"
+  data-testid="link-icon"
+  href="https://google.com"
+  onBlur={[Function]}
+  onContextMenu={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel="noreferrer noopener"
+  tabIndex={0}
+  target="_blank"
+>
+  <div
+    className="MuiAvatar-root MuiAvatar-square css-15w0b3h-MuiAvatar-root"
+  >
+    <img
+      alt="test link name"
+      className="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
+      src="./img/uber-eats-icon.png"
+    />
+  </div>
+  <h6
+    className="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+    data-testid="link-name"
+  >
+    test link name
+  </h6>
+</a>
+`;

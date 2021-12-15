@@ -1,3 +1,5 @@
+import React from 'react';
+
 const EmbedMap = () => {
   const imgUrl = "./img/bat-bun-map.jpg";
   const handleClick = () => {
@@ -5,7 +7,7 @@ const EmbedMap = () => {
   };
 
   return (
-    <div id="embed-map" style={{ backgroundImage: `url(${imgUrl})` }} onClick={handleClick} >
+    <div data-testid="embed-map" id="embed-map" style={{ backgroundImage: `url(${imgUrl})` }} onClick={handleClick} >
     </div>
   )
 }

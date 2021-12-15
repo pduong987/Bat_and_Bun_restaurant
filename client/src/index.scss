@@ -250,6 +250,16 @@ section {
       margin-bottom: 3em;
     }
 
+    .link-icon {
+      background-color: transparent;
+      height: auto;
+      width: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
     .icon-links {
       text-align: center;
 
@@ -272,7 +282,7 @@ section {
 
   h6 {
     text-align: center;
-    font-size: .95em;
+    font-size: .75em;
     line-height: 1.15;
     color: $primary-colour;
   }
@@ -518,6 +528,10 @@ footer {
   #partner-links {
     .MuiContainer-root {
       flex-direction: row;
+    }
+
+    h6 {
+      font-size: .85em;
     }
   }
 
