@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { Paper, Avatar, Typography } from '@mui/material';
+import React from 'react';
+import { Paper, Button, Avatar, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -11,9 +11,19 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const IconLink = ({ linkName, linkUrl, linkIcon }) => {
   return (
-    <Item elevation={1} className="link-icon" component={Link} to={linkUrl}>
+    <Item
+      data-testid="link-icon"
+      elevation={0}
+      className="link-icon"
+      component={Button}
+      disableRipple
+      size="small"
+      target="_blank"
+      rel="noreferrer noopener"
+      href={linkUrl}
+    >
       <Avatar alt={linkName} src={linkIcon} variant="square" sx={{ width: 64, height: 64 }} />
-      <Typography variant="h6">{linkName}</Typography>
+      <Typography data-testid="link-name" variant="h6">{linkName}</Typography>
     </Item>
   )
 }

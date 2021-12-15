@@ -1,6 +1,8 @@
+import React from 'react';
+
 const HeroBanner = ({ imgUrl }) => {
   return (
-    <div id="hero-image" style={{ backgroundImage: `url(${imgUrl})` }}>
+    <div data-testid="hero-image" id="hero-image" style={{ backgroundImage: `url(${imgUrl})` }}>
     </div>
   )
 }

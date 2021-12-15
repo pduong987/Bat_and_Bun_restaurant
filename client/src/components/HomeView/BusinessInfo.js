@@ -19,7 +19,7 @@ const BusinessInfo = () => {
   ];
 
   return (
-    <section id="business-info">
+    <section id="business-info" data-testid="business-info">
       <Container>
         {businessInfo.map((info, i) => (
           <div key={i}>

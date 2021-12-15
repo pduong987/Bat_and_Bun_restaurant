@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches snapshot 1`] = `
+<section
+  data-testid="business-info"
+  id="business-info"
+>
+  <div
+    className="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+  >
+    <div>
+      <h3
+        className="MuiTypography-root MuiTypography-h3 css-ruvpci-MuiTypography-root"
+      >
+        Location
+      </h3>
+      <ul>
+        <li>
+          379B South Dowling St,
+        </li>
+        <li>
+          Darlinghurst NSW 2010
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3
+        className="MuiTypography-root MuiTypography-h3 css-ruvpci-MuiTypography-root"
+      >
+        Contact
+      </h3>
+      <ul>
+        <li>
+          0452 453 686
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3
+        className="MuiTypography-root MuiTypography-h3 css-ruvpci-MuiTypography-root"
+      >
+        Hours
+      </h3>
+      <ul>
+        <li>
+          Mon-Fri 9:30am-3:45pm
+        </li>
+        <li>
+          Sat-Sun 10:00am-3:30pm
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+`;

@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import {
   useMediaQuery,
