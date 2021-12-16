@@ -1,3 +1,4 @@
+import React from 'react';
 import { Container, Typography } from '@mui/material';
 import HeroBanner from '../components/HomeView/HeroBanner';
 
@@ -5,7 +6,7 @@ const AboutView = () => {
   const heroImageUrl = "./img/about-hero-image.jpg";
 
   return (
-    <div id="AboutView">
+    <div data-testid="about-view" id="AboutView">
       <HeroBanner imgUrl={heroImageUrl} />
       <Container>
         <Typography variant="h1" sx={{ fontSize: '3em' }}>Bat + Bun</Typography>

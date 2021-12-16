@@ -1,3 +1,4 @@
+import React from 'react';
 import HeroBanner from '../components/HomeView/HeroBanner';
 import MenuItemList from '../components/HomeView/MenuItemList';
 import PartnerLinks from '../components/HomeView/PartnerLinks';
