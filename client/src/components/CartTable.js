@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Button,
   IconButton,
@@ -17,16 +17,16 @@ import {
   ccyFormat,
   subtotal
 } from '../utils/cartOrderUtils';
-import {
-  CART_ADD,
-  CART_REMOVE
-} from '../reducers/constants';
-import { CartContext } from '../contexts/CartContext';
 
 const invoiceTotal = subtotal(placeholderItems);
 
-const CartTable = () => {
-  const { cartItems, dispatch } = useContext(CartContext);
+const CartTable = ({
+  emptyMessage,
+  cartItems,
+  deleteFromCart,
+  addQty,
+  minQty
+}) => {
 
   return (
     cartItems.length > 0
@@ -45,21 +45,23 @@ const CartTable = () => {
               <TableRow key={item.name}>
                 <TableCell colSpan={1}>
                   {item.name}
-                  <Button
-                    color="error"
-                    sx={{display: 'block', fontSize: '.8em', padding: '0', minWidth: '0', marginTop: '.5em'}}
-                    onClick={() => dispatch({type: CART_REMOVE, payload: item})}
-                  >
-                    Delete
-                  </Button>
+                  {deleteFromCart &&
+                    (<Button
+                      color="error"
+                      sx={{display: 'block', fontSize: '.8em', padding: '0', minWidth: '0', marginTop: '.5em'}}
+                      onClick={() => deleteFromCart(item)}
+                    >
+                      Delete
+                    </Button>)
+                  }
                 </TableCell>
                 <TableCell align="center">
-                  {item.qty > 1
+                  {item.qty > 1 && minQty
                   ? (
                       <IconButton
                         aria-label="reduce quantity"
                         className="min-btn"
-                        onClick={() => dispatch({type: CART_ADD, payload: {name: item.name, qty: -1}})}
+                        onClick={() => minQty(item.name)}
                       >
                         <RemoveIcon />
                       </IconButton>
@@ -69,13 +71,20 @@ const CartTable = () => {
                     )
                   }
                   <span style={{display: 'inline-block', width: '50px', textAlign: 'center'}}>{item.qty}</span>
-                  <IconButton
-                    aria-label="add quantity"
-                    className="add-btn"
-                    onClick={() => dispatch({type: CART_ADD, payload: {name: item.name, qty: 1}})}
-                  >
-                    <AddIcon />
-                  </IconButton>  
+                  {item.qty < 10 && addQty
+                  ? (
+                      <IconButton
+                        aria-label="add quantity"
+                        className="add-btn"
+                        onClick={() => addQty(item.name)}
+                      >
+                        <AddIcon />
+                      </IconButton>
+                    )
+                  : (
+                      <span style={{display: 'inline-block', width: '40px', height: '20px'}}></span>
+                    )
+                  }  
                 </TableCell>
                 <TableCell align="right">${ccyFormat(10.00)}</TableCell>
               </TableRow>
@@ -89,10 +98,18 @@ const CartTable = () => {
         </Table>
       </TableContainer>
     )
-    : (
-      <Container><h4 style={{textAlign: 'center'}}>Your cart is empty. Try adding some items.</h4></Container>
+    : emptyMessage && (
+      <Container><h4 style={{textAlign: 'center'}}>{emptyMessage}</h4></Container>
     )
   )
+}
+
+CartTable.defaultProps = {
+  emptyMessage: "",
+  cartItems: null,
+  deleteFromCart: null,
+  addQty: null,
+  minQty: null
 }
 
 export default CartTable;
