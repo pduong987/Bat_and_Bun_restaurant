@@ -56,21 +56,37 @@ const MenuItemDetail = ({ item }) => {
       </CardContent>
       <CardActions>
         <div>
-          <IconButton
-            aria-label="reduce quantity"
-            className="min-btn"
-            onClick={() => qtyDisplay > 1 && setQtyDisplay(qtyDisplay - 1)}
-          >
-            <RemoveIcon />
-          </IconButton>
+          {qtyDisplay > 1
+          ? (
+              <IconButton
+                aria-label="reduce quantity"
+                className="min-btn"
+                onClick={() => qtyDisplay > 1 && setQtyDisplay(qtyDisplay - 1)}
+              >
+                <RemoveIcon />
+              </IconButton>
+            )
+          : (
+              <span style={{display: 'inline-block', width: '40px', height: '20px'}}></span>
+            )
+          }
+          
           <span className="qty-number">{qtyDisplay}</span>
-          <IconButton
-            aria-label="add quantity"
-            className="add-btn"
-            onClick={() => qtyDisplay < 10 && setQtyDisplay(qtyDisplay + 1)}
-          >
-            <AddIcon />
-          </IconButton>
+
+          {qtyDisplay < 10
+          ? (
+              <IconButton
+                aria-label="add quantity"
+                className="add-btn"
+                onClick={() => qtyDisplay < 10 && setQtyDisplay(qtyDisplay + 1)}
+              >
+                <AddIcon />
+              </IconButton>
+            )
+          : (
+              <span style={{display: 'inline-block', width: '40px', height: '20px'}}></span>
+            )
+          }
         </div>
         <Button
           variant="contained"
