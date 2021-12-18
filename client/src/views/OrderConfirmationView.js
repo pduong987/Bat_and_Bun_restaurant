@@ -14,7 +14,7 @@ const OrderConfirmationView = () => {
 
   useEffect(() => {
     cartItems.length < 1 && navigate('/cart');
-  }, [cartItems]);
+  }, [cartItems, navigate]);
 
   return (
     <div id="OrderConfirmationView">
