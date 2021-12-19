@@ -26,7 +26,7 @@ const OrderConfirmationView = () => {
         cartItems={cartItems}
       />
 
-      <CustomerDetailsForm />
+      <CustomerDetailsForm cartItems={cartItems} />
     </div>
   )
 }

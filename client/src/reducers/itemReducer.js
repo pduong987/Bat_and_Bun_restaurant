@@ -6,9 +6,9 @@ import {
 export const itemReducer = (state, action) => {
   switch (action.type) {
     case ITEMS_SUCCESS:
-      return { items: action.payload };
+      return [...action.payload];
     case ITEMS_FAIL:
-      return { error: action.payload };
+      return [{ error: action.payload }];
     default:
       return state; 
   }

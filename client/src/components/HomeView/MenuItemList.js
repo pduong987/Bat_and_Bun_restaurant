@@ -11,12 +11,12 @@ const MenuItemList = () => {
   const { allItems } = useContext(ItemContext);
   let categories = [], itemsCategory = [];
 
-  if (allItems.items.length > 0) {
-    allItems.items.map(item => !categories.includes(item.category) && categories.push(item.category));
+  if (allItems.length > 0) {
+    allItems.map(item => !categories.includes(item.category) && categories.push(item.category));
 
     // Get items within the category
     itemsCategory = (cat) => {
-      return allItems.items.filter(item => item.category === cat);
+      return allItems.filter(item => item.category === cat);
     };
   }
   

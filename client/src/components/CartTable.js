@@ -25,7 +25,7 @@ const CartTable = ({
   addQty,
   minQty
 }) => {
-  const invoiceTotal = subtotal(cartItems);
+  const totalCost = subtotal(cartItems);
 
   return (
     cartItems.length > 0
@@ -91,7 +91,7 @@ const CartTable = ({
 
             <TableRow>
               <TableCell colSpan={2} align="left" sx={{ fontSize: '1.05em', fontWeight: '700'}}>Total</TableCell>
-              <TableCell align="right" sx={{ fontSize: '1.05em', fontWeight: '700'}}>${ccyFormat(invoiceTotal)}</TableCell>
+              <TableCell align="right" sx={{ fontSize: '1.05em', fontWeight: '700'}}>${ccyFormat(totalCost)}</TableCell>
             </TableRow>
           </TableBody>
         </Table>

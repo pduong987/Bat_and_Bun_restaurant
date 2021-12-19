@@ -8,14 +8,16 @@ import {
   Button
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { subtotal } from '../../utils/cartOrderUtils';
 
-const CustomerDetailsForm = () => {
+const CustomerDetailsForm = ({ cartItems }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const totalCost = subtotal(cartItems);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +27,7 @@ const CustomerDetailsForm = () => {
       setLoading(true);
 
       console.log(name, phone, email);
+      console.log(totalCost);
       // await placeOrder(name, phone, email, order);
 
       navigate("/thank-you");

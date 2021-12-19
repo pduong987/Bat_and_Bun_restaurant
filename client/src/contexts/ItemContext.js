@@ -9,10 +9,7 @@ import { itemReducer } from '../reducers/itemReducer';
 export const ItemContext = createContext();
 
 export const ItemProvider = ({ children }) => {
-  const [allItems, dispatch] = useReducer(itemReducer, [], () => {
-    const localData = localStorage.getItem('allItems');
-    return localData ? JSON.parse(localData) : [];
-  });
+  const [allItems, dispatch] = useReducer(itemReducer, []);
 
   const getAllItems = async () => {
     try {
@@ -26,8 +23,7 @@ export const ItemProvider = ({ children }) => {
   useEffect(() => {
     // eslint-disable-next-line
     getAllItems();
-    localStorage.setItem('allItems', JSON.stringify(allItems));
-  }, [allItems]);
+  }, []);
 
   return (
     <ItemContext.Provider value={{allItems, dispatch}}>
