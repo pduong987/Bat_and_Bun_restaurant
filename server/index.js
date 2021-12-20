@@ -4,7 +4,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 import databaseConnector from './database.js';
-import userRoutes from './routes/userRoutes.js';
+import itemRoutes from './routes/itemRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/batnbun';
 const PORT = process.env.PORT || 5000;
@@ -28,23 +29,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 // ROUTES
-app.use('/users', userRoutes);
-
-// For testing auth
-app.get('/test', (req, res) => {
-  console.log(req.headers.authorization);
-
-  return res.json({
-    testContent: [
-      {
-        propertyOne: 'Text1'
-      },
-      {
-        propertyOne: 'Text2'
-      }
-    ]
-  });
-});
+app.use('/items', itemRoutes);
+app.use('/orders', orderRoutes);
 
 // PRODUCTION: Serve static build client
 app.use(express.static(path.join(__dirname, '/client/build')));
