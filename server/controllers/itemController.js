@@ -34,7 +34,7 @@ const updateItem = async (req, res) => {
   try {
     const item = await Item.findByIdAndUpdate(req.params.id, req.body);
     const updatedItem = await item.save();
-    res.status(204).json(updatedItem);
+    res.status(204);
   } catch (err) {
     res.status(422);
     throw new Error(`Error: ${err}`);
