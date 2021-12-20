@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -9,7 +9,7 @@ import {
   Button
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { subtotal } from '../../utils/cartOrderUtils';
+import { subtotal, placeOrder } from '../../utils/cartOrderUtils';
 import {
   CART_REMOVE_ALL
 } from '../../reducers/constants.js';
@@ -25,17 +25,17 @@ const CustomerDetailsForm = ({ cartItems }) => {
   const [loading, setLoading] = useState(false);
   const totalCost = subtotal(cartItems);
 
-  const placeOrder = async (order) => {
-    try {
-      await axios.post('/orders', order, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-    } catch (err) {
-      setError(`Error placing the order. Error: ${err}.`);
-    }
-  };
+  // const placeOrder = async (order) => {
+  //   try {
+  //     await axios.post('/orders', order, {
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       }
+  //     });
+  //   } catch (err) {
+  //     setError(`Error placing the order. Error: ${err}.`);
+  //   }
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
