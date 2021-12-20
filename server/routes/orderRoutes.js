@@ -9,10 +9,7 @@ import {
 } from '../controllers/orderController.js'
 import { protect } from '../middleware/authMiddleware.js';
 
-// router.route('/').get(protect, getOrders).post(createOrder);
-// router.route('/:id').get(getOrder).put(protect, updateOrder).delete(protect, deleteOrder);
-
-router.route('/').get(getOrders).post(createOrder);
-router.route('/:id').get(getOrder).put(updateOrder).delete(deleteOrder);
+router.route('/').get(protect, getOrders).post(createOrder);
+router.route('/:id').get(getOrder).put(protect, updateOrder).delete(protect, deleteOrder);
 
 export default router;
