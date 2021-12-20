@@ -7,15 +7,15 @@ export const cartReducer = (state, action) => {
   switch (action.type) {
     case CART_ADD:
       const additionalItem = action.payload;
-      const alreadyInCart = state.find(itemInCart => itemInCart.id === additionalItem.id);
+      const alreadyInCart = state.find(itemInCart => itemInCart.item === additionalItem.item);
       
       if (alreadyInCart) {
-        return state.map(itemInCart => itemInCart.id === additionalItem.id ? ({...additionalItem, qty: additionalItem.qty + itemInCart.qty}) : itemInCart);
+        return state.map(itemInCart => itemInCart.item === additionalItem.item ? ({...additionalItem, qty: additionalItem.qty + itemInCart.qty}) : itemInCart);
       } else {
         return [
           ...state,
           {
-            id: action.payload.id,
+            item: action.payload.item,
             name: action.payload.name,
             qty: action.payload.qty,
             price: action.payload.price
@@ -23,7 +23,7 @@ export const cartReducer = (state, action) => {
         ];
       }
     case CART_REMOVE:
-      return state.filter(item => item.id !== action.payload.id);
+      return state.filter(item => item.item !== action.payload.item);
     default:
       return state;
   }

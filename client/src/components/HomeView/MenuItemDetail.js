@@ -23,7 +23,15 @@ const MenuItemDetail = ({ item }) => {
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
-    dispatch({type: CART_ADD, payload: {id: item._id, name: item.name, qty: qtyDisplay, price: Number(item.price)}});
+    dispatch({
+      type: CART_ADD,
+      payload: {
+        name: item.name,
+        qty: qtyDisplay,
+        price: Number(item.price),
+        item: item._id
+      }
+    });
     
     // Redirect to Cart View
     navigate('/cart');

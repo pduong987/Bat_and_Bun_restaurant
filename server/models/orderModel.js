@@ -5,7 +5,6 @@ const orderSchema = mongoose.Schema(
     orderRef: { type: String, required: true },
     cartItems: [
       {
-        id: { type: String, required: true },
         name: { type: String, required: true },
         qty: { type: String, required: true },
         price: { type: String, required: true },

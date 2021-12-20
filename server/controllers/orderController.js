@@ -29,7 +29,11 @@ const getOrder = async (req, res) => {
 const createOrder = async (req, res) => {
   try {
     // Generate simple order reference number
-    const genOrderRef = new Date().getTime() + (Math.random()*10) + (Math.random()*10) + 10;
+    const currentDate = new Date();
+    const dd = String(currentDate.getDate()).padStart(2, '0');
+    const time = String(currentDate.getTime());
+    const genOrderRef = dd + time.substring(time.length - 3) + Math.floor(Math.random() * 9);  // dd000r
+
     const {
       cartItems,
       totalCost,
@@ -51,7 +55,8 @@ const createOrder = async (req, res) => {
 
     const savedOrder = await newOrder.save();
 
-    res.status(201).json(savedOrder);
+    // res.status(201).json(savedOrder);
+    res.json(savedOrder);
   } catch (err) {
     res.status(422);
     throw new Error(`Error: ${err}`);
