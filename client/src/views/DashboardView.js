@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState/*, useEffect*/ } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import {
   Container,
   Typography,
@@ -12,7 +12,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 const DashboardView = ({ token }) => {
   const [error, setError] = useState('');
-  const [data, setData] = useState('');
+  // const [data, setData] = useState('');
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -28,21 +28,21 @@ const DashboardView = ({ token }) => {
     }
   }
 
-  const fetchData = async (token) => {
-    const res = await axios.get("http://localhost:5000/test", {
-      headers: {
-        Authorization: "Bearer " + token,
-      }
-    });
+  // const fetchData = async (token) => {
+  //   const res = await axios.get("http://localhost:5000/test", {
+  //     headers: {
+  //       Authorization: "Bearer " + token,
+  //     }
+  //   });
 
-    console.log(res.data);
-    setData(res.data);
-  };
+  //   console.log(res.data);
+  //   setData(res.data);
+  // };
 
-  useEffect(() => {
-    currentUser && fetchData(currentUser.accessToken);
-    console.log(currentUser.accessToken);
-  }, [currentUser]);
+  // useEffect(() => {
+  //   currentUser && fetchData(currentUser.accessToken);
+  //   console.log(currentUser.accessToken);
+  // }, [currentUser]);
 
   return (
     <div id="DashboardView">
@@ -55,7 +55,7 @@ const DashboardView = ({ token }) => {
         {currentUser && <h2>{currentUser.email}</h2>}
         {currentUser && <h2>{currentUser.accessToken}</h2>}
 
-        {data && data.testContent.map(t => <h3 key={t.propertyOne}>{t.propertyOne}</h3>)}
+        {/* {data && data.testContent.map(t => <h3 key={t.propertyOne}>{t.propertyOne}</h3>)} */}
 
         <Button
           type="submit"

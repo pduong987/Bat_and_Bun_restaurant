@@ -15,7 +15,7 @@ const getOrder = async (req, res) => {
     const order = await Order.findById(req.params.id);
     const phone = req.query.phone;
 
-    if (order.customerDetails.phone === phone) {
+    if (order.customerPhone === phone) {
       res.json(order);
     } else {
       res.status(404);
@@ -28,13 +28,8 @@ const getOrder = async (req, res) => {
 
 const createOrder = async (req, res) => {
   try {
-    // Generate simple order reference number
-    const currentDate = new Date();
-    const dd = String(currentDate.getDate()).padStart(2, '0');
-    const time = String(currentDate.getTime());
-    const genOrderRef = dd + time.substring(time.length - 3) + Math.floor(Math.random() * 9);  // dd000r
-
     const {
+      orderRef,
       cartItems,
       totalCost,
       customerName,
@@ -44,7 +39,7 @@ const createOrder = async (req, res) => {
     } = req.body;
 
     const newOrder = new Order({
-      orderRef: genOrderRef,
+      orderRef,
       cartItems,
       totalCost,
       customerName,
@@ -55,8 +50,7 @@ const createOrder = async (req, res) => {
 
     const savedOrder = await newOrder.save();
 
-    // res.status(201).json(savedOrder);
-    res.json(savedOrder);
+    res.status(201).json(savedOrder);
   } catch (err) {
     res.status(422);
     throw new Error(`Error: ${err}`);

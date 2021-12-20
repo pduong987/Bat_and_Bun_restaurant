@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -11,12 +11,12 @@ import {
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { subtotal } from '../../utils/cartOrderUtils';
 import {
-  ORDER_SUCCESS,
-  ORDER_FAIL
-} from '../../reducers/constants';
-import { orderReducer } from '../../reducers/orderReducer';
+  CART_REMOVE_ALL
+} from '../../reducers/constants.js';
+import { CartContext } from '../../contexts/CartContext';
 
 const CustomerDetailsForm = ({ cartItems }) => {
+  const { dispatch } = useContext(CartContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -24,20 +24,16 @@ const CustomerDetailsForm = ({ cartItems }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const totalCost = subtotal(cartItems);
-  const [orders, dispatch] = useReducer(orderReducer, []);
 
   const placeOrder = async (order) => {
     try {
-      const { data } = await axios.post('/orders', order, {
+      await axios.post('/orders', order, {
         headers: {
           'Content-Type': 'application/json'
         }
       });
-  
-      dispatch({ type: ORDER_SUCCESS, payload: data });
     } catch (err) {
-      setError("Error placing the order.");
-      dispatch({ type: ORDER_FAIL, payload: err.message });
+      setError(`Error placing the order. Error: ${err}.`);
     }
   };
 
@@ -47,7 +43,14 @@ const CustomerDetailsForm = ({ cartItems }) => {
     setError('');
     setLoading(true);
 
+    // Generate simple order reference number
+    const currentDate = new Date();
+    const dd = String(currentDate.getDate()).padStart(2, '0');
+    const time = String(currentDate.getTime());
+    const genOrderRef = dd + time.substring(time.length - 3) + Math.floor(Math.random() * 9);  // dd000r
+
     const incomingOrder = {
+      orderRef: genOrderRef,
       cartItems: cartItems,
       totalCost: totalCost,
       customerName: name,
@@ -55,15 +58,13 @@ const CustomerDetailsForm = ({ cartItems }) => {
       customerEmail: email,
       orderStatus: "Processing..."
     };
-    
+
     placeOrder(incomingOrder);
 
-    console.log(orders);
-    
-    console.log(error);
-    localStorage.removeItem('cartItems');
+    // localStorage.setItem('cartItems', JSON.stringify([]));
+    dispatch({type: CART_REMOVE_ALL, payload: []});
     setLoading(false);
-    navigate("/thank-you");
+    navigate("/thank-you", { state: genOrderRef });
   };
 
   return (

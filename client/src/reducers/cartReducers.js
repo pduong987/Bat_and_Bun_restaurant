@@ -1,6 +1,7 @@
 import {
   CART_ADD,
-  CART_REMOVE
+  CART_REMOVE,
+  CART_REMOVE_ALL
 } from './constants.js';
 
 export const cartReducer = (state, action) => {
@@ -24,6 +25,8 @@ export const cartReducer = (state, action) => {
       }
     case CART_REMOVE:
       return state.filter(item => item.item !== action.payload.item);
+    case CART_REMOVE_ALL:
+      return action.payload;
     default:
       return state;
   }
