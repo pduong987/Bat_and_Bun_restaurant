@@ -12,10 +12,10 @@ const getOrders = async (req, res) => {
 
 const getOrder = async (req, res) => {
   try {
-    const order = await Order.findById(req.params.id);
     const phone = req.query.phone;
+    const order = await Order.find({orderRef: req.params.id, customerPhone: phone});
 
-    if (order.customerPhone === phone) {
+    if (order) {
       res.json(order);
     } else {
       res.status(404);
