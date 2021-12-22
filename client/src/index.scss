@@ -382,6 +382,51 @@ section {
   }
 }
 
+/* Admin */
+#DashboardView {
+  h1,
+  h2,
+  h3 {
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.75em;
+    margin-top: 2.5em;
+  }
+
+  table {
+    margin: 0 auto 2em;
+  }
+
+  .order-record {
+    margin-bottom: 3em;
+  }
+
+  .admin-menu-drawer {
+    > div {
+      position: relative;
+      height: 100%;
+    }
+  
+    .MuiDrawer-paperAnchorDockedLeft {
+      > ul {
+        width: 100%;
+  
+        div {
+          height: 68px;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  
+    .list-active {
+      background: #f4f4f4 !important;
+    }
+  }
+}
+
 /* Cart View */
 #CartView {
   .MuiContainer-root {
@@ -557,6 +602,25 @@ footer {
 
       p {
         max-width: 35%;
+      }
+    }
+  }
+
+  /* Admin */
+  #DashboardView {
+    .admin-menu-drawer {
+      .MuiDrawer-paperAnchorDockedLeft {
+        > div {
+          margin-right: 7px;
+        }
+  
+        > ul {
+          align-self: flex-start;
+          
+          .MuiListItemIcon-root {
+            padding-left: 7px;
+          }
+        }
       }
     }
   }
