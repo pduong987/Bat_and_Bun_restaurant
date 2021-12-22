@@ -15,6 +15,8 @@ import AboutView from './views/AboutView';
 import LoginView from './views/LoginView';
 import PrivateRoute from './components/PrivateRoute';
 import DashboardView from './views/DashboardView';
+import AdminMenuList from './components/DashboardView/AdminMenuList';
+import AdminOrderList from './components/DashboardView/AdminOrderList';
 
 // For testing display of sub-pages
 import CartView from './views/CartView';
@@ -50,9 +52,14 @@ function App() {
                       <Route exact path='/' element={<HomeView />} />
                       <Route exact path='/about' element={<AboutView />} />
                       <Route exact path='/admin-login' element={<LoginView />} />
-                      <Route exact path='/dashboard' element={
+                      <Route exact path='/dashboard/*' element={
                         <PrivateRoute>
-                          <DashboardView />
+                          <DashboardView>
+                            <Routes>
+                              <Route exact path='/' element={<AdminMenuList />} />
+                              <Route exact path='/orders' element={<AdminOrderList />} />
+                            </Routes>
+                          </DashboardView>
                         </PrivateRoute>
                       } />
 
