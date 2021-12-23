@@ -18,14 +18,26 @@ import axios from "axios";
 const DashboardView = ({ token }) => {
   const [error, setError] = useState("");
 
+  // This holds all the orders which we get from the API
   const [orders, setOrders] = useState(null);
+
+  // The action is for the big dropdown on the dashboard
+  // With this, we know what the user wants to do with the selected orders
+  // At the moment this just allows us to select a bunch of orders and change
+  // the status of the orders.
   const [action, setAction] = useState("");
+
+  // This is an array of all the selected orders which we want to apply the status update to.
+  // Later we can do other things to the orders and possibly use this for other parts of the app.
   const [selectedOrders, setSelectedOrders] = useState(null);
 
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
+  // IMPORTANT: We only do this once, when the page loads.
   useEffect(() => {
+    // Get all the orders for the app
+
     axios
       .get("http://0.0.0.0:5000/orders")
       .then((result) => {
@@ -42,16 +54,21 @@ const DashboardView = ({ token }) => {
             created: item.createdAt,
           };
         });
+
+        // Set our state with the orders we found
         setOrders(rows || []);
       })
       .catch((error) => {
         console.error(error);
       });
+
+    // See here. We do not have a condition, as we only want to run once.
   }, []);
 
   async function handleLogout() {
     setError("");
 
+    console.log("Logging out: " + currentUser);
     try {
       await logout();
       navigate("/admin-login");
@@ -61,6 +78,7 @@ const DashboardView = ({ token }) => {
     }
   }
 
+  // As we are using Data Grid, we need to define our columns
   const columns = [
     { field: "orderRef", headerName: "Reference", width: 130 },
     { field: "orderStatus", headerName: "Status", width: 130 },
@@ -72,23 +90,31 @@ const DashboardView = ({ token }) => {
     { field: "created", headerName: "Created", width: 130 },
   ];
 
+  // This fires eveyr time the user selects an order.
+  // The lists of orders is updated which we can then apply actions to.
   const handleOrderSelection = (selected) => {
     setSelectedOrders(selected);
   };
 
+  // This is when someone clicks on the "Go" button to perform the
+  // action on the selected orders
   const handleAction = (event) => {
     setAction(event.target.value);
   };
 
+  // This is the actual logic which gets called when we perform the action
   const handleActionDo = (event) => {
     console.log("Running action: " + action + " : " + selectedOrders);
 
+    // We must have a selected action and atleast one order to run this code.
+    // Otherwise there is nothing to do :)
     if (action && selectedOrders && selectedOrders.length > 0) {
       selectedOrders.forEach((orderId) => {
         console.log("Updating Order: " + orderId);
 
         const newStatusMap = {};
 
+        // Set the status based on the selected action
         if (action === "mark-as-processed") {
           newStatusMap.orderStatus = "Processed";
         } else if (action === "mark-as-processing") {
@@ -97,9 +123,12 @@ const DashboardView = ({ token }) => {
           newStatusMap.orderStatus = "Closed";
         }
 
+        // Call the API to update the status for each of the selected items
         axios
           .patch("http://0.0.0.0:5000/orders/" + orderId, newStatusMap)
           .then((result) => {
+            // IMPORTANT: To ensure we update the view, we get all orders again
+            // this is not very efficient but should be fine if there are only a few orders (<100)
             axios
               .get("http://0.0.0.0:5000/orders")
               .then((result) => {
@@ -129,6 +158,8 @@ const DashboardView = ({ token }) => {
     }
   };
 
+  // Provided we have an array we will show them in the DataGrid
+  // Otherwise we just show a Loading... sign
   if (Array.isArray(orders)) {
     return (
       <div id="DashboardView">
@@ -143,6 +174,7 @@ const DashboardView = ({ token }) => {
           {error && <Alert severity="error">{error}</Alert>}
 
           <br />
+          {/* Our Dropdown for the action and button to do things */}
           <FormControl fullWidth>
             <InputLabel id="set-action-select-label">Action</InputLabel>
             <Select
@@ -172,6 +204,7 @@ const DashboardView = ({ token }) => {
           <br />
           <br />
 
+          {/* Our really cool data grid :) */}
           <div style={{ height: 400, width: "100%" }}>
             <DataGrid
               rows={orders}
@@ -182,8 +215,6 @@ const DashboardView = ({ token }) => {
               onSelectionModelChange={handleOrderSelection}
             />
           </div>
-
-          {/* {data && data.testContent.map(t => <h3 key={t.propertyOne}>{t.propertyOne}</h3>)} */}
 
           <br />
           <Button
