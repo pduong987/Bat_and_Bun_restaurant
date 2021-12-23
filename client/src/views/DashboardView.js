@@ -2,19 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import axios from 'axios';
-import {
-  Container,
-  Typography,
-  Alert,
-  Button,
-  TableContainer,
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  Paper,
-  TableCell,
-} from "@mui/material";
+import { Container, Typography, Alert, Button } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
 
@@ -31,7 +20,20 @@ const DashboardView = ({ token }) => {
     axios
       .get("http://0.0.0.0:5000/orders")
       .then((result) => {
-        setOrders(result.data || []);
+        const rows = result.data.map((item) => {
+          return {
+            id: item._id,
+            orderRef: item.orderRef,
+            orderStatus: item.orderStatus,
+            customerName: item.customerName,
+            customerEmail: item.customerEmail,
+            customerPhone: item.customerPhone,
+            itemCount: item.cartItems.length,
+            totalCost: item.totalCost,
+            created: item.createdAt,
+          };
+        });
+        setOrders(rows || []);
       })
       .catch((error) => {
         console.error(error);
@@ -66,6 +68,28 @@ const DashboardView = ({ token }) => {
   //   console.log(currentUser.accessToken);
   // }, [currentUser]);
 
+  const columns = [
+    { field: "orderRef", headerName: "Order Reference", width: 130 },
+    { field: "customerName", headerName: "Customer Name", width: 130 },
+    { field: "customerEmail", headerName: "Customer Email", width: 130 },
+    { field: "customerPhone", headerName: "Customer Phone", width: 130 },
+    { field: "itemCount", headerName: "Items", width: 130 },
+    { field: "totalCost", headerName: "Cost", width: 130 },
+    { field: "created", headerName: "Created", width: 130 },
+  ];
+
+  /**
+ *         id: item._id,
+            orderRef: item.orderRef,
+            orderStatus: item.orderStatus,
+            customerName: item.customerName,
+            customerEmail: item.customerEmail,
+            customerPhone: item.customerPhone,
+            itemCount: item.cartItems.length,
+            totalCost: item.totalCost,
+            created: item.createdAt,
+ */
+
   if (Array.isArray(orders)) {
     return (
       <div id="DashboardView">
@@ -79,37 +103,15 @@ const DashboardView = ({ token }) => {
           {/* Show error */}
           {error && <Alert severity="error">{error}</Alert>}
 
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Order Ref</TableCell>
-                  <TableCell align="right">Customer</TableCell>
-                  <TableCell align="right">Email</TableCell>
-                  <TableCell align="right">Phone</TableCell>
-                  <TableCell align="right">Cost</TableCell>
-                  <TableCell align="right">Items</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {orders.map((row) => (
-                  <TableRow
-                    key={row._id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {row.orderRef}
-                    </TableCell>
-                    <TableCell align="right">{row.customerName}</TableCell>
-                    <TableCell align="right">{row.customerEmail}</TableCell>
-                    <TableCell align="right">{row.customerPhone}</TableCell>
-                    <TableCell align="right">${row.totalCost}</TableCell>
-                    <TableCell align="right">{row.cartItems.length}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <div style={{ height: 400, width: "100%" }}>
+            <DataGrid
+              rows={orders}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+              checkboxSelection
+            />
+          </div>
 
           {/* {data && data.testContent.map(t => <h3 key={t.propertyOne}>{t.propertyOne}</h3>)} */}
 

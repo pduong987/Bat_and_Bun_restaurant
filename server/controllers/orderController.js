@@ -35,7 +35,7 @@ const createOrder = async (req, res) => {
       customerName,
       customerPhone,
       customerEmail,
-      orderStatus
+      orderStatus,
     } = req.body;
 
     const newOrder = new Order({
@@ -45,7 +45,7 @@ const createOrder = async (req, res) => {
       customerName,
       customerPhone,
       customerEmail,
-      orderStatus
+      orderStatus,
     });
 
     const savedOrder = await newOrder.save();
@@ -72,7 +72,7 @@ const deleteOrder = async (req, res) => {
   try {
     if (order) {
       await order.remove();
-      res.json({ message: 'Order deleted' });
+      res.json({ message: "Order deleted" });
     }
   } catch (err) {
     res.status(404);
@@ -80,10 +80,4 @@ const deleteOrder = async (req, res) => {
   }
 };
 
-export {
-  getOrders,
-  getOrder,
-  createOrder,
-  updateOrder,
-  deleteOrder
-}
+export { getOrders, getOrder, createOrder, updateOrder, deleteOrder };
