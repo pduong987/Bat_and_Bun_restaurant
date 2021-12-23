@@ -1,8 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import axios from 'axios';
-import { Container, Typography, Alert, Button } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Alert,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
@@ -11,8 +19,9 @@ const DashboardView = ({ token }) => {
   const [error, setError] = useState("");
 
   const [orders, setOrders] = useState(null);
+  const [action, setAction] = useState("");
+  const [selectedOrders, setSelectedOrders] = useState(null);
 
-  // const [data, setData] = useState('');
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -29,7 +38,7 @@ const DashboardView = ({ token }) => {
             customerEmail: item.customerEmail,
             customerPhone: item.customerPhone,
             itemCount: item.cartItems.length,
-            totalCost: item.totalCost,
+            totalCost: "$" + item.totalCost,
             created: item.createdAt,
           };
         });
@@ -52,43 +61,73 @@ const DashboardView = ({ token }) => {
     }
   }
 
-  // const fetchData = async (token) => {
-  //   const res = await axios.get("http://localhost:5000/test", {
-  //     headers: {
-  //       Authorization: "Bearer " + token,
-  //     }
-  //   });
-
-  //   console.log(res.data);
-  //   setData(res.data);
-  // };
-
-  // useEffect(() => {
-  //   currentUser && fetchData(currentUser.accessToken);
-  //   console.log(currentUser.accessToken);
-  // }, [currentUser]);
-
   const columns = [
-    { field: "orderRef", headerName: "Order Reference", width: 130 },
-    { field: "customerName", headerName: "Customer Name", width: 130 },
-    { field: "customerEmail", headerName: "Customer Email", width: 130 },
-    { field: "customerPhone", headerName: "Customer Phone", width: 130 },
-    { field: "itemCount", headerName: "Items", width: 130 },
-    { field: "totalCost", headerName: "Cost", width: 130 },
+    { field: "orderRef", headerName: "Reference", width: 130 },
+    { field: "orderStatus", headerName: "Status", width: 130 },
+    { field: "customerName", headerName: "Name", width: 130 },
+    { field: "customerEmail", headerName: "Email", width: 130 },
+    { field: "customerPhone", headerName: "Phone", width: 130 },
+    { field: "itemCount", headerName: "Items" },
+    { field: "totalCost", headerName: "Cost", width: 90 },
     { field: "created", headerName: "Created", width: 130 },
   ];
 
-  /**
- *         id: item._id,
-            orderRef: item.orderRef,
-            orderStatus: item.orderStatus,
-            customerName: item.customerName,
-            customerEmail: item.customerEmail,
-            customerPhone: item.customerPhone,
-            itemCount: item.cartItems.length,
-            totalCost: item.totalCost,
-            created: item.createdAt,
- */
+  const handleOrderSelection = (selected) => {
+    setSelectedOrders(selected);
+  };
+
+  const handleAction = (event) => {
+    setAction(event.target.value);
+  };
+
+  const handleActionDo = (event) => {
+    console.log("Running action: " + action + " : " + selectedOrders);
+
+    if (action && selectedOrders && selectedOrders.length > 0) {
+      selectedOrders.forEach((orderId) => {
+        console.log("Updating Order: " + orderId);
+
+        const newStatusMap = {};
+
+        if (action === "mark-as-processed") {
+          newStatusMap.orderStatus = "Processed";
+        } else if (action === "mark-as-processing") {
+          newStatusMap.orderStatus = "Processing";
+        } else if (action === "mark-as-closed") {
+          newStatusMap.orderStatus = "Closed";
+        }
+
+        axios
+          .patch("http://0.0.0.0:5000/orders/" + orderId, newStatusMap)
+          .then((result) => {
+            axios
+              .get("http://0.0.0.0:5000/orders")
+              .then((result) => {
+                const rows = result.data.map((item) => {
+                  return {
+                    id: item._id,
+                    orderRef: item.orderRef,
+                    orderStatus: item.orderStatus,
+                    customerName: item.customerName,
+                    customerEmail: item.customerEmail,
+                    customerPhone: item.customerPhone,
+                    itemCount: item.cartItems.length,
+                    totalCost: "$" + item.totalCost,
+                    created: item.createdAt,
+                  };
+                });
+                setOrders(rows || []);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      });
+    }
+  };
 
   if (Array.isArray(orders)) {
     return (
@@ -103,13 +142,44 @@ const DashboardView = ({ token }) => {
           {/* Show error */}
           {error && <Alert severity="error">{error}</Alert>}
 
+          <br />
+          <FormControl fullWidth>
+            <InputLabel id="set-action-select-label">Action</InputLabel>
+            <Select
+              labelId="set-action-select-label"
+              id="set-action-select"
+              value={action}
+              label="Action"
+              onChange={handleAction}
+            >
+              <MenuItem value={"mark-as-processed"}>Mark as Processed</MenuItem>
+              <MenuItem value={"mark-as-processing"}>
+                Mark as Processing
+              </MenuItem>
+              <MenuItem value={"mark-as-closed"}>Mark as Closed</MenuItem>
+            </Select>
+            <Button
+              type="submit"
+              color="primary"
+              variant="contained"
+              margin="normal"
+              onClick={handleActionDo}
+            >
+              Go
+            </Button>
+          </FormControl>
+          <br />
+          <br />
+          <br />
+
           <div style={{ height: 400, width: "100%" }}>
             <DataGrid
               rows={orders}
               columns={columns}
               pageSize={5}
               rowsPerPageOptions={[5]}
-              checkboxSelection
+              checkboxSelection={true}
+              onSelectionModelChange={handleOrderSelection}
             />
           </div>
 

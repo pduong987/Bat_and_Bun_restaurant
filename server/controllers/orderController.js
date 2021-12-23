@@ -13,15 +13,10 @@ const getOrders = async (req, res) => {
 const getOrder = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
-    const phone = req.query.phone;
 
-    if (order.customerPhone === phone) {
-      res.json(order);
-    } else {
-      res.status(404);
-    }
+    return res.json(order);
   } catch (err) {
-    res.status(404);
+    res.status(404).json();
     throw new Error(`Error: ${err}`);
   }
 };
