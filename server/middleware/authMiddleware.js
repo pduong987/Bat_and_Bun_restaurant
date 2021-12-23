@@ -1,23 +1,28 @@
-import { admin } from '../config/firebase-config.js';
+import { admin } from "../config/firebase-config.js";
 
 export const protect = async (req, res, next) => {
-  const idToken = await req.headers.authorization.split(' ')[1];
+  const authHeader = req.headers.authorization;
+
+  const idToken = authHeader ? authHeader.split(" ")[1] : null;
+
+  if (!idToken) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
 
   try {
-    admin.auth()
-    .verifyIdToken(idToken)
-    .then((decodedToken) => {
-      console.log(decodedToken);
-      
-      if (decodedToken) {
-        return next();
-      }
+    admin
+      .auth()
+      .verifyIdToken(idToken)
+      .then((decodedToken) => {
+        if (decodedToken) {
+          return next();
+        }
 
-      return res.json({ message: "Unauthorized" });
-    })
-    .catch(err => console.log(err));
+        return res.status(401).json({ message: "Unauthorized" });
+      })
+      .catch((err) => console.log(err));
   } catch (err) {
     console.log(err);
-    return res.json({ message: `Internal error: ${err}`});
+    return res.json({ message: `Internal error: ${err}` });
   }
-}
+};
