@@ -56,8 +56,8 @@ function App() {
                         <PrivateRoute>
                           <DashboardView>
                             <Routes>
-                              <Route exact path='/' element={<AdminMenuList />} />
-                              <Route exact path='/orders' element={<AdminOrderList />} />
+                              <Route exact path='/' element={<AdminOrderList />} />
+                              <Route exact path='/menu' element={<AdminMenuList />} />
                             </Routes>
                           </DashboardView>
                         </PrivateRoute>
