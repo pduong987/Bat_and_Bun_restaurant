@@ -33,6 +33,7 @@ const DashboardView = ({ token }) => {
 
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // IMPORTANT: We only do this once, when the page loads.
   useEffect(() => {
@@ -69,14 +70,6 @@ const DashboardView = ({ token }) => {
     setError("");
 
     console.log("Logging out: " + currentUser);
-    try {
-      await logout();
-      navigate("/admin-login");
-    } catch (err) {
-      setError("Log out failed.");
-      console.log(err);
-    }
-  }
 
   // As we are using Data Grid, we need to define our columns
   const columns = [
