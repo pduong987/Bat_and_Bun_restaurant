@@ -1,16 +1,17 @@
-import path from 'path';
-import cors from 'cors';
-import express from 'express';
-import dotenv from 'dotenv';
+const path = require('path');
+const cors = require('cors');
+const express = require('express');
+const dotenv = require('dotenv');
 dotenv.config();
-import databaseConnector from './database.js';
-import itemRoutes from './routes/itemRoutes.js';
-import orderRoutes from './routes/orderRoutes.js';
+const databaseConnector = require('./database');
+const itemRoutes = require('./routes/itemRoutes');
+const orderRoutes = require('./routes/orderRoutes.js');
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/batnbun';
 const PORT = process.env.PORT || 5000;
 const HOST = '0.0.0.0';
-const __dirname = path.resolve();
+
+path.resolve();
 
 const app = express();
 

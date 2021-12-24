@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "MERN restaurant web app",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node ./server/index.js",
     "server": "nodemon ./server/index.js",

@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
-import admin from 'firebase-admin';
+const admin = require('firebase-admin');
 
 admin.initializeApp(
   {
@@ -8,6 +8,6 @@ admin.initializeApp(
   }
 );
 
-export {
+module.exports = {
   admin
 };

@@ -1,6 +1,6 @@
-import { admin } from "../config/firebase-config.js";
+const { admin } = require("../config/firebase-config");
 
-export const protect = async (req, res, next) => {
+async function protect(req, res, next) {
   const authHeader = req.headers.authorization;
 
   const idToken = authHeader ? authHeader.split(" ")[1] : null;
@@ -25,4 +25,8 @@ export const protect = async (req, res, next) => {
     console.log(err);
     return res.json({ message: `Internal error: ${err}` });
   }
+};
+
+module.exports = {
+  protect
 };
