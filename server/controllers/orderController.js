@@ -12,16 +12,11 @@ const getOrders = async (req, res) => {
 
 const getOrder = async (req, res) => {
   try {
-    const phone = req.query.phone;
-    const order = await Order.find({orderRef: req.params.id, customerPhone: phone});
+    const order = await Order.findById(req.params.id);
 
-    if (order) {
-      res.json(order);
-    } else {
-      res.status(404);
-    }
+    return res.json(order);
   } catch (err) {
-    res.status(404);
+    res.status(404).json();
     throw new Error(`Error: ${err}`);
   }
 };
@@ -35,7 +30,7 @@ const createOrder = async (req, res) => {
       customerName,
       customerPhone,
       customerEmail,
-      orderStatus
+      orderStatus,
     } = req.body;
 
     const newOrder = new Order({
@@ -45,7 +40,7 @@ const createOrder = async (req, res) => {
       customerName,
       customerPhone,
       customerEmail,
-      orderStatus
+      orderStatus,
     });
 
     const savedOrder = await newOrder.save();
@@ -72,7 +67,7 @@ const deleteOrder = async (req, res) => {
   try {
     if (order) {
       await order.remove();
-      res.json({ message: 'Order deleted' });
+      res.json({ message: "Order deleted" });
     }
   } catch (err) {
     res.status(404);
@@ -80,10 +75,4 @@ const deleteOrder = async (req, res) => {
   }
 };
 
-export {
-  getOrders,
-  getOrder,
-  createOrder,
-  updateOrder,
-  deleteOrder
-}
+export { getOrders, getOrder, createOrder, updateOrder, deleteOrder };
