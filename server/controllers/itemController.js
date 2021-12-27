@@ -1,4 +1,4 @@
-import Item from "../models/itemModel.js";
+const Item = require("../models/itemModel");
 
 const getItems = async (req, res) => {
   try {
@@ -54,10 +54,10 @@ const deleteItem = async (req, res) => {
   }
 };
 
-export {
+module.exports = {
   getItems,
   getItem,
   createItem,
   updateItem,
   deleteItem
-}
+};

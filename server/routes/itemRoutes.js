@@ -1,15 +1,16 @@
-import express from 'express';
+const express = require ('express');
 const router = express.Router();
-import {
+const {
   getItems,
   getItem,
   createItem,
   updateItem,
   deleteItem
-} from '../controllers/itemController.js'
-import { protect } from '../middleware/authMiddleware.js';
+} = require('../controllers/itemController');
+
+const { protect } = require('../middleware/authMiddleware');
 
 router.route('/').get(getItems).post(protect, createItem);
 router.route('/:id').get(getItem).put(protect, updateItem).delete(protect, deleteItem);
 
-export default router;
+module.exports = router;

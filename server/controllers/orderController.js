@@ -1,4 +1,4 @@
-import Order from "../models/orderModel.js";
+const Order = require("../models/orderModel");
 
 const getOrders = async (req, res) => {
   try {
@@ -75,4 +75,10 @@ const deleteOrder = async (req, res) => {
   }
 };
 
-export { getOrders, getOrder, createOrder, updateOrder, deleteOrder };
+module.exports = {
+  getOrders,
+  getOrder,
+  createOrder,
+  updateOrder,
+  deleteOrder
+};
