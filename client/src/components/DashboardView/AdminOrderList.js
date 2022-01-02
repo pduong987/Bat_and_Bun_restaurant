@@ -145,14 +145,12 @@ const AdminOrderList = () => {
     return (
       <div id="DashboardView">
         <Container>
-          <br />
-          <Typography variant="h1" sx={{ fontSize: "3em" }}>
+          <Typography variant="h1" sx={{ fontSize: "3em", margin: "1em auto" }}>
             Order List
           </Typography>
-          <br />
 
           {/* Our Dropdown for the action and button to do things */}
-          <FormControl fullWidth>
+          <FormControl fullWidth sx={{ marginBottom: "3em" }}>
             <InputLabel id="set-action-select-label">Action</InputLabel>
             <Select
               labelId="set-action-select-label"
@@ -177,9 +175,6 @@ const AdminOrderList = () => {
               Go
             </Button>
           </FormControl>
-          <br />
-          <br />
-          <br />
 
           {/* Our really cool data grid :) */}
           <div style={{ height: 400, width: "100%" }}>
@@ -197,7 +192,7 @@ const AdminOrderList = () => {
     );
   } else {
     return (
-      <Typography variant="h1" sx={{ fontSize: "3em" }}>
+      <Typography variant="h1" sx={{ fontSize: "3em", margin: "1em auto" }}>
         Loading...
       </Typography>
     );

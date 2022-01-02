@@ -6,7 +6,8 @@ const itemSchema = mongoose.Schema(
     notes: { type: String },
     image: { type: String },
     category: { type: String, required: true },
-    price: { type: Number, required: true }
+    price: { type: Number, required: true },
+    deleted: { type: Boolean, default: false, required: true }
   }
 );
 
