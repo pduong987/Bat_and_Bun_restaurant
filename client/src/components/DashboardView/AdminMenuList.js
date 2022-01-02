@@ -1,10 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {
   Container,
   Typography,
   Button
 } from '@mui/material';
+import { useAuth } from '../../contexts/AuthContext';
 import ListTable from './ListTable';
 import {
   ITEMS_SUCCESS,
@@ -13,6 +15,7 @@ import {
 import { ItemContext } from '../../contexts/ItemContext';
 
 const AdminMenuList = () => {
+  const { currentUser } = useAuth();
   const { allItems, dispatch } = useContext(ItemContext);
   const [categories, setCategories] = useState([]);
 
@@ -49,6 +52,8 @@ const AdminMenuList = () => {
         <Button
           color="primary"
           variant="contained"
+          component={Link}
+          to="/dashboard/menu/new"
         >
           Add New Item
         </Button>
@@ -58,11 +63,11 @@ const AdminMenuList = () => {
           <div key={i}>
             <Typography
               variant="h2"
-              sx={{ fontSize: "3em", margin: "1em auto" }}
+              sx={{ margin: "1em auto" }}
             >
               {category}
             </Typography>
-            <ListTable items={itemsCategory(category)} />
+            <ListTable items={itemsCategory(category)} token={currentUser.accessToken} />
           </div>
         ))}
       </div>

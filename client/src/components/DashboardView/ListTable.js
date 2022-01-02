@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Button,
   Table,
@@ -8,9 +9,21 @@ import {
   TableHead,
   TableRow
 } from '@mui/material';
+import { updateItem } from '../../utils/itemUtils';
 import { ccyFormat } from '../../utils/cartOrderUtils';
 
-const ListTable = ({ items }) => {
+const ListTable = ({ items, token }) => {
+  const navigate = useNavigate();
+
+  const handleEdit = (item) => {
+    navigate(`/dashboard/menu/edit/${item._id}`);
+  };
+
+  const handleDelete = (item) => {
+    item.deleted = true;
+    updateItem(item, token);
+  };
+
   return (
     <TableContainer className="cart-table">
       <Table sx={{ maxWidth: 900 }} aria-label="cart details">
@@ -29,24 +42,17 @@ const ListTable = ({ items }) => {
                 >
                   {item.name}
                 </span>
-                {/*deleteFromCart &&
-                  (<Button
-                    color="error"
-                    sx={{display: 'block', fontSize: '.8em', padding: '0', minWidth: '0', marginTop: '.5em'}}
-                    onClick={() => deleteFromCart(item)}
-                  >
-                    Delete
-                  </Button>)
-                  */}
                   <Button
                     color="primary"
                     sx={{display: 'inline-block', fontSize: '.8em', padding: '0', minWidth: '0', marginTop: '.5em', marginRight: '15px'}}
+                    onClick={() => handleEdit(item)}
                   >
                     Edit
                   </Button>
                   <Button
                     color="error"
                     sx={{display: 'inline-block', fontSize: '.8em', padding: '0', minWidth: '0', marginTop: '.5em'}}
+                    onClick={() => handleDelete(item)}
                   >
                     Delete
                   </Button>

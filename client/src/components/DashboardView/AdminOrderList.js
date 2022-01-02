@@ -55,9 +55,7 @@ const AdminOrderList = () => {
     .catch((error) => {
       console.error(error);
     });
-
-    // See here. We do not have a condition, as we only want to run once.
-  }, []);
+  }, [currentUser.accessToken]);
 
   // As we are using Data Grid, we need to define our columns
   const columns = [
