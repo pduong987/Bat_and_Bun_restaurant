@@ -21,6 +21,22 @@ const getOrder = async (req, res) => {
   }
 };
 
+const trackOrder = async (req, res) => {
+  try {
+    const phone = req.query.phone;
+    const order = await Order.find({orderRef: req.params.id, customerPhone: phone});
+
+    if (order) {
+      res.json(order);
+    } else {
+      res.status(404);
+    }
+  } catch (err) {
+    res.status(404);
+    throw new Error(`Error: ${err}`);
+  }
+};
+
 const createOrder = async (req, res) => {
   try {
     const {
@@ -78,6 +94,7 @@ const deleteOrder = async (req, res) => {
 module.exports = {
   getOrders,
   getOrder,
+  trackOrder,
   createOrder,
   updateOrder,
   deleteOrder

@@ -5,13 +5,32 @@ import {
 import CartTable from '../CartTable';
 
 const TrackResult = ({ trackResult }) => {
-  if (trackResult) {
+  const { 
+    orderRef,
+    cartItems,
+    totalCost,
+    orderStatus
+   } = trackResult;
+
+  if (orderStatus && orderStatus !== 'Closed') {
     return (
       <>
-        <Typography variant="h2" sx={{ fontSize: '1.75em', textAlign: 'center' }}>Order #00000</Typography>
-        <Typography variant="h3" sx={{ margin: '1em auto 2em', fontSize: '1.05em', fontWeight: '700', textAlign: 'center', color: '#3162ae' }}>Processing</Typography>
+        <Typography variant="h2" sx={{ fontSize: '1.75em', textAlign: 'center' }}>Order #{orderRef}</Typography>
+        <Typography variant="h3" sx={{ margin: '1em auto', fontSize: '1.25em', fontWeight: '700', textAlign: 'center', color: '#3162ae' }}>{orderStatus}</Typography>
   
-        <CartTable />
+        <CartTable cartItems={cartItems} />
+      </>
+    )
+  } else {
+    return (
+      <>
+        <Typography variant="body1" sx={{ margin: '1em auto', textAlign: 'center' }}>
+          <span style={{ color: '#fa8c8c', fontWeight: '700' }}>No record</span> was found for
+        </Typography>
+        <Typography variant="h2" sx={{ fontSize: '1.75em', textAlign: 'center' }}>Order #{orderRef}</Typography>
+        <Typography variant="body1" sx={{ textAlign: 'center' }}>
+          Please contact us at <strong><a href="tel:+61452453686" target="_blank" rel="noopener noreferrer" style={{ color: '#3162ae' }}>0452 453 686</a></strong> for any enquiries.
+        </Typography>
       </>
     )
   }
