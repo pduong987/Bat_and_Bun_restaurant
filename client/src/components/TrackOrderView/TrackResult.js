@@ -12,11 +12,11 @@ const TrackResult = ({ trackResult }) => {
     orderStatus
    } = trackResult;
 
-  if (orderStatus && orderStatus !== 'Closed') {
+  if (orderStatus && orderStatus !== 'Cancelled') {
     return (
       <>
         <Typography variant="h2" sx={{ fontSize: '1.75em', textAlign: 'center' }}>Order #{orderRef}</Typography>
-        <Typography variant="h3" sx={{ margin: '1em auto', fontSize: '1.25em', fontWeight: '700', textAlign: 'center', color: '#3162ae' }}>{orderStatus}</Typography>
+        <Typography variant="h3" sx={{ margin: '1em auto', fontSize: '1.25em', fontWeight: '700', textAlign: 'center', color: (orderStatus === 'Processing...' ? '#3162ae' : '#3c3c3c') }}>{orderStatus}</Typography>
   
         <CartTable cartItems={cartItems} />
       </>

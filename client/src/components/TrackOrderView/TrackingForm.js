@@ -28,22 +28,7 @@ const TrackingForm = ({ setTrackResult }) => {
           'Content-Type': 'application/json'
         }
       })
-      .then((result) => {
-        // const {
-        //   _id,
-        //   orderRef,
-        //   cartItems,
-        //   totalCost,
-        //   customerName,
-        //   customerPhone,
-        //   customerEmail,
-        //   orderStatus,
-        //   createdAt
-        // } = result.data[0];
-        // console.log(orderStatus);
-
-        setTrackResult(result.data[0]);
-      })
+      .then((result) => setTrackResult(result.data[0]))
       .catch((error) => {
         console.error(error);
       });
