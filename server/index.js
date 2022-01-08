@@ -7,12 +7,18 @@ const databaseConnector = require("./database");
 const itemRoutes = require("./routes/itemRoutes");
 const orderRoutes = require("./routes/orderRoutes.js");
 
+<<<<<<< HEAD
 const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://localhost:27017/batnbun";
 const PORT = process.env.PORT || 5999;
 const HOST = "0.0.0.0";
+=======
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/batnbun';
+const PORT = process.env.PORT || 5999;
+const HOST = '0.0.0.0';
+>>>>>>> main
 
-path.resolve();
+__dirname = path.resolve();
 
 const app = express();
 

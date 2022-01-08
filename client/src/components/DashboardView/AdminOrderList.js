@@ -96,22 +96,32 @@ const AdminOrderList = () => {
         const newStatusMap = {};
 
         // Set the status based on the selected action
-        if (action === "mark-as-processed") {
-          newStatusMap.orderStatus = "Processed";
+        if (action === "mark-as-fulfilled") {
+          newStatusMap.orderStatus = "Fulfilled";
         } else if (action === "mark-as-processing") {
-          newStatusMap.orderStatus = "Processing";
-        } else if (action === "mark-as-closed") {
-          newStatusMap.orderStatus = "Closed";
+          newStatusMap.orderStatus = "Processing...";
+        } else if (action === "mark-as-cancelled") {
+          newStatusMap.orderStatus = "Cancelled";
         }
 
         // Call the API to update the status for each of the selected items
         axios
-          .patch("/orders/" + orderId, newStatusMap)
+          .put("/orders/" + orderId, newStatusMap, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${currentUser.accessToken}`
+            }
+          })
           .then((result) => {
             // IMPORTANT: To ensure we update the view, we get all orders again
             // this is not very efficient but should be fine if there are only a few orders (<100)
             axios
-              .get("/orders")
+              .get("/orders", {
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${currentUser.accessToken}`
+                }
+              })
               .then((result) => {
                 const rows = result.data.map((item) => {
                   return {
@@ -161,11 +171,11 @@ const AdminOrderList = () => {
               label="Action"
               onChange={handleAction}
             >
-              <MenuItem value={"mark-as-processed"}>Mark as Processed</MenuItem>
+              <MenuItem value={"mark-as-fulfilled"}>Mark as Fulfilled</MenuItem>
               <MenuItem value={"mark-as-processing"}>
                 Mark as Processing
               </MenuItem>
-              <MenuItem value={"mark-as-closed"}>Mark as Closed</MenuItem>
+              <MenuItem value={"mark-as-cancelled"}>Mark as Cancelled</MenuItem>
             </Select>
             <Button
               type="submit"

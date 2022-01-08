@@ -505,6 +505,11 @@ section {
 
 /* Track Order View */
 #TrackOrderView {
+  width: 80%;
+  max-width: 500px;
+  padding-bottom: 5em;
+  margin: 0 auto;
+  
   .MuiContainer-root {
     padding: 5em 0;
     width: 80%;
