@@ -11,7 +11,7 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/batnbu
 const PORT = process.env.PORT || 5999;
 const HOST = '0.0.0.0';
 
-path.resolve();
+__dirname = path.resolve();
 
 const app = express();
 
