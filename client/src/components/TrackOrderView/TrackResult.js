@@ -8,7 +8,6 @@ const TrackResult = ({ trackResult }) => {
   const { 
     orderRef,
     cartItems,
-    totalCost,
     orderStatus
    } = trackResult;
 
