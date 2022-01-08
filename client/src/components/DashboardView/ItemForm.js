@@ -17,7 +17,7 @@ const ItemForm = ({ setError, token, item }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (item && Object.keys(item).length === 0 && Object.getPrototypeOf(item) === Object.prototype) {
+    if (item.name === '') {
       setAddItemForm(true);
     } else {
       setAddItemForm(false);
