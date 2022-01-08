@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   getOrders,
   getOrder,
+  trackOrder,
   createOrder,
   updateOrder,
   deleteOrder,
@@ -11,6 +12,6 @@ const {
 const { protect } = require('../middleware/authMiddleware');
 
 router.route('/').get(protect, getOrders).post(createOrder);
-router.route('/:id').get(getOrder).put(protect, updateOrder).delete(protect, deleteOrder);
+router.route('/:id').get(trackOrder).get(protect, getOrder).put(protect, updateOrder).delete(protect, deleteOrder);
 
 module.exports = router;
