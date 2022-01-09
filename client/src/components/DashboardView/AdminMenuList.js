@@ -45,32 +45,31 @@ const AdminMenuList = () => {
   return (
     <div id="DashboardView">
       <Container>
-        <Typography variant="h1" sx={{ fontSize: "3em", margin: "1em auto" }}>
+        <Typography variant="h1">
           Menu Item List
         </Typography>
-      <div style={{textAlign: 'center'}}>
-        <Button
-          color="primary"
-          variant="contained"
-          component={Link}
-          to="/dashboard/menu/new"
-        >
-          Add New Item
-        </Button>
-      </div>
-      <div>
-        {categories.map((category, i) => (
-          <div key={i}>
-            <Typography
-              variant="h2"
-              sx={{ margin: "1em auto" }}
-            >
-              {category}
-            </Typography>
-            <ListTable items={itemsCategory(category)} token={currentUser.accessToken} />
-          </div>
-        ))}
-      </div>
+        <div style={{textAlign: 'center', marginTop: '2em'}}>
+          <Button
+            color="primary"
+            variant="contained"
+            component={Link}
+            to="/dashboard/menu/new"
+          >
+            Add New Item
+          </Button>
+        </div>
+        <div>
+          {categories.map((category, i) => (
+            <div key={i}>
+              <Typography
+                variant="h2"
+              >
+                {category}
+              </Typography>
+              <ListTable items={itemsCategory(category)} token={currentUser.accessToken} />
+            </div>
+          ))}
+        </div>
       </Container>
     </div>
   )
