@@ -3,6 +3,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Container, Typography } from '@mui/material';
 import CheckoutForm from '../components/OrderConfirmationView/CheckoutForm';
 
+const handlePaymentResult = (success, message) => {
+    if (!success) {
+        alert('Sorry it didnt work: ' + message);
+    } else {
+        alert(message);
+    }
+};
+
 const ThankYouView = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
@@ -50,7 +58,10 @@ const ThankYouView = () => {
                     #{state}
                 </Typography>
                 <div>
-                    <CheckoutForm price={100.56} />
+                    <CheckoutForm
+                        price={100.56}
+                        paymentResult={handlePaymentResult}
+                    />
                 </div>
             </Container>
         </div>
