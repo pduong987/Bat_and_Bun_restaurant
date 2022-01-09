@@ -6,6 +6,7 @@ dotenv.config();
 const databaseConnector = require('./database');
 const itemRoutes = require('./routes/itemRoutes');
 const orderRoutes = require('./routes/orderRoutes.js');
+const paymentRoutes = require('./routes/paymentRoutes');
 
 const MONGODB_URI =
     process.env.MONGODB_URI || 'mongodb://localhost:27017/batnbun';
@@ -35,6 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 // ROUTES
 app.use('/items', itemRoutes);
 app.use('/orders', orderRoutes);
+app.use('/payments', paymentRoutes);
 
 // PRODUCTION: Serve static build client
 app.use(express.static(path.join(__dirname, '/client/build')));
