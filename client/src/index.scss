@@ -390,13 +390,35 @@ section {
     text-align: center;
   }
 
+  h1 {
+    font-size: 3em;
+    margin-top: 1em;
+  }
+
   h2 {
     font-size: 1.75em;
     margin-top: 2.5em;
+    margin-bottom: .5em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: .5em;
   }
 
   table {
     margin: 0 auto 2em;
+  }
+
+  .order-action-dropdown {
+    margin: 3em auto;
+  }
+
+  .order-grid {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 3em;
   }
 
   .order-record {
