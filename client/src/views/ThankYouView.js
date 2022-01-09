@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Container, Typography } from '@mui/material';
-import CheckoutForm from '../components/OrderConfirmationView/CheckoutForm';
 
 const handlePaymentResult = (success, message) => {
     if (!success) {
@@ -57,12 +56,6 @@ const ThankYouView = () => {
                 >
                     #{state}
                 </Typography>
-                <div>
-                    <CheckoutForm
-                        price={100.56}
-                        paymentResult={handlePaymentResult}
-                    />
-                </div>
             </Container>
         </div>
     );
