@@ -497,6 +497,20 @@ section {
     align-items: center;
   }
 
+  .card-details {
+    margin-top: 1.5em;
+
+    > p:not(:first-child) {
+      position: relative;
+      display: inline-block;
+      width: 50%;
+    }
+
+    .StripeElement {
+      margin-top: .25em;
+    }
+  }
+
   .customer-details-form {
     form {
       display: flex;
