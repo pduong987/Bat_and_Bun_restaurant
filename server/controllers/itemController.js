@@ -2,7 +2,7 @@ const Item = require("../models/itemModel");
 
 const getItems = async (req, res) => {
   try {
-    const items = await Item.find({});
+    const items = await Item.find({ deleted: false });
     res.json(items);
   } catch (err) {
     res.status(404);

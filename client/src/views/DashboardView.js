@@ -20,7 +20,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 import { useAuth } from '../contexts/AuthContext';
 
-const drawerWidth = 240;
+const drawerWidth = 180;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,

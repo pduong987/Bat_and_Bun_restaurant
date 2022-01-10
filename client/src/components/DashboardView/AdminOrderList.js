@@ -212,7 +212,7 @@ const AdminOrderList = () => {
     );
   } else {
     return (
-      <Typography variant="h1" sx={{ fontSize: "3em" }}>
+      <Typography variant="h1" sx={{ fontSize: "3em", margin: "1em auto" }}>
         Loading...
       </Typography>
     );

@@ -1,42 +1,76 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import {
+  Container,
+  Typography,
   Button
 } from '@mui/material';
+import { useAuth } from '../../contexts/AuthContext';
 import ListTable from './ListTable';
+import {
+  ITEMS_SUCCESS,
+  ITEMS_FAIL
+} from '../../reducers/constants';
 import { ItemContext } from '../../contexts/ItemContext';
 
 const AdminMenuList = () => {
-  const { allItems } = useContext(ItemContext);
-  let categories = [], itemsCategory = [];
+  const { currentUser } = useAuth();
+  const { allItems, dispatch } = useContext(ItemContext);
+  const [categories, setCategories] = useState([]);
 
-  if (allItems.length > 0) {
-    allItems.map(item => !categories.includes(item.category) && categories.push(item.category));
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axios.get("/items");
+        dispatch({ type: ITEMS_SUCCESS, payload: data });
+      } catch (err) {
+        dispatch({ type: ITEMS_FAIL, payload: err.message });
+      }
+    })();
+    
+    if (allItems.length > 0) {
+      let cats = [];
+      allItems.map(item => !cats.includes(item.category) && cats.push(item.category));
+      
+      setCategories(cats);
+    }
+  }, [allItems, dispatch]);
 
-    // Get items within the category
-    itemsCategory = (cat) => {
-      return allItems.filter(item => item.category === cat);
-    };
-  }
+  // Get items within the category
+  const itemsCategory = (cat) => {
+    return allItems.filter(item => item.category === cat);
+  };
 
   return (
-    <div>
-      <h1>Menu Item List</h1>
-      <div style={{textAlign: 'center'}}>
-        <Button
-          color="primary"
-          variant="contained"
-        >
-          Add New Item
-        </Button>
-      </div>
-      <div>
-        {categories.map((category, i) => (
-          <div key={i}>
-            <h2>{category}</h2>
-            <ListTable items={itemsCategory(category)} />
-          </div>
-        ))}
-      </div>
+    <div id="DashboardView">
+      <Container>
+        <Typography variant="h1">
+          Menu Item List
+        </Typography>
+        <div style={{textAlign: 'center', marginTop: '2em'}}>
+          <Button
+            color="primary"
+            variant="contained"
+            component={Link}
+            to="/dashboard/menu/new"
+          >
+            Add New Item
+          </Button>
+        </div>
+        <div>
+          {categories.map((category, i) => (
+            <div key={i}>
+              <Typography
+                variant="h2"
+              >
+                {category}
+              </Typography>
+              <ListTable items={itemsCategory(category)} token={currentUser.accessToken} />
+            </div>
+          ))}
+        </div>
+      </Container>
     </div>
   )
 }
