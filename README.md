@@ -58,6 +58,9 @@ Admin user login for test:
       <a href="#installation-for-development">Installation for Development</a>
     </li>
     <li>
+      <a href="#dependencies-or-libraries">Dependencies or Libraries</a>
+    </li>
+    <li>
       <a href="#acknowledgement">Acknowledgement</a>
     </li>
   </ol>
@@ -592,6 +595,31 @@ The front-end part of the project is all in */client* directory. The back-end pa
   └── README.md
   ```
 </details>
+
+&nbsp;  
+
+## Dependencies or Libraries
+
+List of packages (npm) used in this project.
+
+&nbsp;  
+
+|Package|Description|
+|:---:|:---|
+|aws-sdk, multer, multer-s3|AWS SDK package, Multer (and its related packages) used for image upload to AWS S3.|
+|axios|Axios package used for http request between client and server.|
+|babel and its related packages|Babel package used for JS transpiling.|
+|cors|Cors package used for Express middleware to enable Cross-Origin Resource Sharing.|
+|dotenv|DotEnv package used for loading environment variables automatically to the process.|
+|express|Express package used for routing in server.|
+|firebase and its related packages|Firebase package (and its related packages) used for authentication admin login to dashboard.|
+|mongoose|Mongoose package used as Object Data Modeling (ODM) library for NodeJS and MongoDB.|
+|mui and its related packages|Material UI package (and its related packages) used for front end element styling.|
+|nodemon|Nodemon package used for running front and back-end servers simultaneously.|
+|react-router-dom|Routing package used for dynamic routing in client (ReactJS) app.|
+|react testing-library and its related packages, jest|React Testing Library package (and its related packages) and Jest package used for testing.|
+|sass|SASS package used for compiling SASS.|
+|stripe|Stripe package used for easy access to Stripe API.|
 
 &nbsp;  
 
