@@ -2,8 +2,6 @@ const aws = require("aws-sdk");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 
-const Upload = require("../models/uploadModel");
-
 const s3 = new aws.S3({
   accessKeyId: process.env.S3_ACCESS_KEY,
   secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
@@ -32,8 +30,6 @@ const setItemImage = (req, res, next) => {
   uploadSingle(req, res, async (err) => {
     if (err)
       return res.status(400).json({ success: false, message: err.message });
-
-    await Upload.create({ imageUrl: req.file.location });
 
     res.status(200).json(req.file.location);
   });
