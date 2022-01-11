@@ -6,7 +6,8 @@ import { subtotal, placeOrder } from '../../utils/cartOrderUtils';
 import { CART_REMOVE_ALL } from '../../reducers/constants.js';
 import { CartContext } from '../../contexts/CartContext';
 import axios from 'axios';
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+// import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
 const CustomerDetailsForm = ({ cartItems }) => {
     const { dispatch } = useContext(CartContext);
@@ -82,7 +83,8 @@ const CustomerDetailsForm = ({ cartItems }) => {
             amount: totalCost * 100,
         });
 
-        const cardElement = elements.getElement(CardElement);
+        // const cardElement = elements.getElement(CardElement);
+        const cardElement = elements.getElement(CardNumberElement, CardExpiryElement, CardCvcElement);
 
         // Step 2: Create payment method
 
@@ -103,7 +105,7 @@ const CustomerDetailsForm = ({ cartItems }) => {
 
             if (!confirmedCardPayment.error) {
                 // Mark as paid
-                incomingOrder.orderStatus = 'Paid';
+                incomingOrder.orderStatus = 'Processing...';
 
                 // FINAL STEP: Send order to our API
                 await placeOrder(incomingOrder);
@@ -139,9 +141,11 @@ const CustomerDetailsForm = ({ cartItems }) => {
                 }}
             >
                 <strong>Payment Details</strong>
-                <br />
-                <br />
-                <CardElement></CardElement>
+                <div className="card-details">
+                  <p>Card Number: <CardNumberElement /></p>
+                  <p>Exp: <CardExpiryElement /></p>
+                  <p>CVC: <CardCvcElement /></p>
+                </div>
             </div>
 
             {/* Show error */}
@@ -183,6 +187,7 @@ const CustomerDetailsForm = ({ cartItems }) => {
                         variant='contained'
                         margin='normal'
                         endIcon={<KeyboardArrowRightIcon />}
+                        disabled={loading}
                     >
                         Pay ${totalCost}
                     </Button>

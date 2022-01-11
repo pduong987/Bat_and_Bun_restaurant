@@ -153,6 +153,12 @@ section {
   .item-detail-card {
     margin-bottom: 2.5em;
 
+    .MuiCardMedia-root {
+      max-width: 150px;
+      max-height: 100px;
+      margin: 0 auto;
+    }
+
     .MuiCardContent-root {
       padding-bottom: 0.35em;
     }
@@ -453,6 +459,13 @@ section {
     width: 80%;
     max-width: 500px;
     margin: 0 auto;
+
+    .item-image-display img {
+      display: block;
+      max-width: 150px;
+      height: auto;
+      margin-top: 5px;
+    }
   }
 }
 
@@ -495,6 +508,20 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .card-details {
+    margin-top: 1.5em;
+
+    > p:not(:first-child) {
+      position: relative;
+      display: inline-block;
+      width: 50%;
+    }
+
+    .StripeElement {
+      margin-top: .25em;
+    }
   }
 
   .customer-details-form {
@@ -589,6 +616,11 @@ footer {
   /* Home View: Menu Item List */
   #menu-item-list {
     .item-detail-card {
+      .MuiCardMedia-root {
+        max-width: 300px;
+        max-height: 175px;
+      }
+
       .MuiCardActions-root {
         > div {
           .qty-number {
@@ -661,6 +693,16 @@ footer {
 }
 
 @media (min-width: 900px) {
+  /* Home View: Menu Item List */
+  #menu-item-list {
+    .item-detail-card {
+      .MuiCardMedia-root {
+        max-width: 400px;
+        max-height: 250px;
+      }
+    }
+  }
+
   /* Home View: Embed Map */
   #embed-map {
     height: 500px;
