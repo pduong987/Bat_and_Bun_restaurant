@@ -123,8 +123,8 @@ const ItemForm = ({ setError, token, item }) => {
     <div className="item-form">
       {image &&
         (
-          <p>Item Image
-          <img src={image} alt={`${title}-${image.substring(image.lastIndexOf("-") + 1, image.lastIndexOf("."))}`} style={{ display: 'block', maxWidth: '150px' }} />
+          <p className="item-image-display">Item Image
+          <img src={image} alt={`${title}-${image.substring(image.lastIndexOf("-") + 1, image.lastIndexOf("."))}`} />
           </p>
         )
       }
