@@ -7,6 +7,7 @@ const databaseConnector = require('./database');
 const itemRoutes = require('./routes/itemRoutes');
 const orderRoutes = require('./routes/orderRoutes.js');
 const paymentRoutes = require('./routes/paymentRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
 
 const MONGODB_URI =
     process.env.MONGODB_URI || 'mongodb://localhost:27017/batnbun';
@@ -37,6 +38,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/items', itemRoutes);
 app.use('/orders', orderRoutes);
 app.use('/payments', paymentRoutes);
+app.use('/upload', uploadRoutes);
 
 // PRODUCTION: Serve static build client
 app.use(express.static(path.join(__dirname, '/client/build')));

@@ -20,6 +20,7 @@ import AdminOrderList from './components/DashboardView/AdminOrderList';
 import AddNewItem from './components/DashboardView/AddNewItem';
 import EditItem from './components/DashboardView/EditItem';
 import OrderRecord from './components/DashboardView/OrderRecord';
+import UploadImage from './components/DashboardView/UploadImage';
 
 // For testing display of sub-pages
 import CartView from './views/CartView';
@@ -83,6 +84,7 @@ function App() {
                         <Route exact path='/order-confirmation' element={<OrderConfirmationView />} />
                         <Route exact path='/thank-you' element={<ThankYouView />} />
                         <Route exact path='/track-order' element={<TrackOrderView />} />
+                        <Route exact path='/upload' element={<UploadImage />} />
                       </Routes>
                     </main>
                     <Footer />

@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const UploadImage = () => {
   const [fileData, setFileData] = useState();
+  const [imageUrl, setImageUrl] = useState(null);
 
   const fileChangeHandler = (e) => {
     setFileData(e.target.files[0]);
@@ -14,17 +16,15 @@ const UploadImage = () => {
     const data = new FormData();
     data.append("image", fileData); // image key to use in Postman
 
-    const server = "http://localhost:5999/upload";
+    const server = "http://localhost:5999/upload/setItemImage";
 
     console.log(`data: ${data}`);
 
-    // Send reqest to backend - Single upload
-    fetch(`${server}/single`, {
-      method: "POST",
-      body: data,
-    })
+    axios.post(`${server}`, data)
       .then((result) => {
         console.log("File sent successfully", result);
+        console.log(`Image URL: ${result.data}`);
+        setImageUrl(result.data);
       })
       .catch((err) => {
         console.log("Something Went Wrong", err);
@@ -40,12 +40,9 @@ const UploadImage = () => {
         <br />
         <button type="submit">Send to backend</button>
       </form>
-      <br />
-      <img
-        src="http://localhost:5999/images/1636891838696-XEBIA 1.jpeg"
-        alt="S3 file"
-        width="800"
-      />
+      {imageUrl &&
+        <img src={imageUrl} alt="test image" />
+      }
     </div>
   );
 }
