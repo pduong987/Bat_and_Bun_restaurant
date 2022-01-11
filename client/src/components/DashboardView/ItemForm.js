@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import {
   TextField,
   Button
@@ -7,6 +8,7 @@ import {
 import { createItem, updateItem } from '../../utils/itemUtils';
 
 const ItemForm = ({ setError, token, item }) => {
+  const [fileData, setFileData] = useState();
   const [category, setCategory] = useState(item.category);
   const [title, setTitle] = useState(item.name);
   const [description, setDescription] = useState(item.notes);
@@ -24,6 +26,10 @@ const ItemForm = ({ setError, token, item }) => {
     }
   }, [item]);
 
+  const fileChangeHandler = (e) => {
+    setFileData(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,33 +37,85 @@ const ItemForm = ({ setError, token, item }) => {
       setError('');
       setLoading(true);
 
-      if(addItemForm) {
-        const newItem = {
-          name: title,
-          notes: description,
-          image: image || "/img/items/image-placeholder.jpg",
-          category: category,
-          price: price,
-          deleted: false
-        };
+      // TEST UPLOAD ===============================
+      console.log("file data ====>", fileData);
+      e.preventDefault();
 
-        createItem(newItem, token);
-      } else {
-        const updatedItem = {
-          ...item,
-          name: title,
-          notes: description,
-          image: image || "/img/items/image-placeholder.jpg",
-          category: category,
-          price: price
-        }
+      const data = new FormData();
+      data.append("image", fileData); // image key to use in Postman
+
+      const server = "/upload/setItemImage";
+
+      console.log(`data: ${data}`);
+
+      axios.post(`${server}`, data)
+        .then((result) => {
+          console.log("File sent successfully", result);
+          console.log(`Image URL: ${result.data}`);
+          setImage(result.data);
+
+          if(addItemForm) {
+            const newItem = {
+              name: title,
+              notes: description,
+              image: result.data,
+              category: category,
+              price: price,
+              deleted: false
+            };
+    
+            createItem(newItem, token);
+          } else {
+            const updatedItem = {
+              ...item,
+              name: title,
+              notes: description,
+              image: image || "/img/items/image-placeholder.jpg",
+              category: category,
+              price: price
+            }
+            
+            updateItem(updatedItem, token);
+          }
+    
+          setLoading(false);
+    
+          // navigate("/dashboard/menu");
+
+        })
+        .catch((err) => {
+          console.log("Something Went Wrong", err);
+        });
+      
+      // ============================================
+
+      // if(addItemForm) {
+      //   const newItem = {
+      //     name: title,
+      //     notes: description,
+      //     image: image || "/img/items/image-placeholder.jpg",
+      //     category: category,
+      //     price: price,
+      //     deleted: false
+      //   };
+
+      //   createItem(newItem, token);
+      // } else {
+      //   const updatedItem = {
+      //     ...item,
+      //     name: title,
+      //     notes: description,
+      //     image: image || "/img/items/image-placeholder.jpg",
+      //     category: category,
+      //     price: price
+      //   }
         
-        updateItem(updatedItem, token);
-      }
+      //   updateItem(updatedItem, token);
+      // }
 
-      setLoading(false);
+      // setLoading(false);
 
-      navigate("/dashboard/menu");
+      // // navigate("/dashboard/menu");
     } catch (err) {
       setError("Error creating new menu item.");
       console.log(err);
@@ -106,7 +164,7 @@ const ItemForm = ({ setError, token, item }) => {
           required
           onChange={e => setPrice(e.target.value)}
         />
-        <TextField
+        {/* <TextField
           variant="standard"
           label="Image"
           name="image"
@@ -114,7 +172,12 @@ const ItemForm = ({ setError, token, item }) => {
           margin="normal"
           value={image}
           onChange={e => setImage(e.target.value)}
-        />
+        /> */}
+
+
+        
+        <input type="file" onChange={fileChangeHandler} />
+
 
         <div style={{textAlign: 'center', margin: '2em auto'}}>
           <Button
@@ -127,6 +190,10 @@ const ItemForm = ({ setError, token, item }) => {
           </Button>
         </div>
       </form>
+
+      {image &&
+        <img src={image} alt="testing display upload" />
+      }
     </div>
   )
 }

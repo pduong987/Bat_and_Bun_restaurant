@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const UploadImage = () => {
+const UploadImage = ({ setImage }) => {
   const [fileData, setFileData] = useState();
   const [imageUrl, setImageUrl] = useState(null);
 
@@ -16,7 +16,7 @@ const UploadImage = () => {
     const data = new FormData();
     data.append("image", fileData); // image key to use in Postman
 
-    const server = "http://localhost:5999/upload/setItemImage";
+    const server = "/upload/setItemImage";
 
     console.log(`data: ${data}`);
 
@@ -25,6 +25,7 @@ const UploadImage = () => {
         console.log("File sent successfully", result);
         console.log(`Image URL: ${result.data}`);
         setImageUrl(result.data);
+        setImage(result.data);
       })
       .catch((err) => {
         console.log("Something Went Wrong", err);
