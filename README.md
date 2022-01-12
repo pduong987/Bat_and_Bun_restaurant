@@ -82,13 +82,19 @@ The website has to be easy to use by the customers, who should be able to see in
 
 ### Functionality and Features
 
-- **Admin Dashboard**: The owner of the restaurant will sign in as administrator of the website and gain access to the Admin Dashboard. From here the owner will manage the menu (add and remove items, change the price of items), and will track the orders. Currently, only order that has been paid in full will be processed and displayed on the Admin Dashboard.
+&nbsp;  
 
-- **Image Upload**: Through the Admin Dashboard, the owner would be able to upload pictures of the menu items, through a form when creating or editing their menu items. Images are stored in AWS S3, with URL reference saved in MongoDB.
+![App Main Features](./docs/features.jpg)
 
-- **No-Fuss Checkout**: The customers will have the option to view the menu and place an order without creating an account. We realised that it is easier and faster process if the customer is not required to make those additional steps to log in. We want the website to be easy and fast to use. So, once the customers are going to be ready to place an order, they will need to add their item to the cart, proceed to order confirmation page, and enter few personal details and credit card details through Stripe, and then place the order right away.
+&nbsp;  
 
-- **Track Order Status**: After the customer place the order, they will receive a reference number which they will be able to use to get the status of their order through the tracking page. They will need to enter the order reference number as well as their phone number used during checkout to retrieve their order details so to reduce chances of random people checking other people's order details.
+1. **Admin Dashboard**: The owner of the restaurant will sign in as administrator of the website and gain access to the Admin Dashboard. From here the owner will manage the menu (add and remove items, change the price of items), and will track the orders. Currently, only order that has been paid in full will be processed and displayed on the Admin Dashboard.
+
+2. **Image Upload**: Through the Admin Dashboard, the owner would be able to upload pictures of the menu items, through a form when creating or editing their menu items. Images are stored in AWS S3, with URL reference saved in MongoDB.
+
+3. **No-Fuss Checkout**: The customers will have the option to view the menu and place an order without creating an account. We realised that it is easier and faster process if the customer is not required to make those additional steps to log in. We want the website to be easy and fast to use. So, once the customers are going to be ready to place an order, they will need to add their item to the cart, proceed to order confirmation page, and enter few personal details and credit card details through Stripe, and then place the order right away.
+
+4. **Track Order Status**: After the customer place the order, they will receive a reference number which they will be able to use to get the status of their order through the tracking page. They will need to enter the order reference number as well as their phone number used during checkout to retrieve their order details so to reduce chances of random people checking other people's order details.
 
 
 ### Target Audience
