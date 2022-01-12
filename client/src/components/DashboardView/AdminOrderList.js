@@ -47,7 +47,7 @@ const AdminOrderList = () => {
           customerPhone: item.customerPhone,
           cartItems: item.cartItems,
           itemCount: item.cartItems.length,
-          totalCost: "$" + item.totalCost,
+          totalCost: "$" + item.totalCost.toFixed(2),
           created: item.createdAt,
         };
       });
@@ -140,7 +140,7 @@ const AdminOrderList = () => {
                         customerPhone: item.customerPhone,
                         cartItems: item.cartItems,
                         itemCount: item.cartItems.length,
-                        totalCost: "$" + item.totalCost,
+                        totalCost: "$" + item.totalCost.toFixed(2),
                         created: item.createdAt,
                       };
                     });

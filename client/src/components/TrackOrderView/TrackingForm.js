@@ -23,7 +23,7 @@ const TrackingForm = ({ setTrackResult }) => {
       setError('');
       setLoading(true);
 
-      axios.get(`/orders/${orderReference}?phone=${phone}`, {
+      axios.get(`/orders/${orderReference}?phone=${phone.trim().split('').filter(n => !n.match(/[^0-9]/g)).join('')}`, {
         headers: {
           'Content-Type': 'application/json'
         }

@@ -58,7 +58,7 @@ const CustomerDetailsForm = ({ cartItems }) => {
             cartItems: cartItems,
             totalCost: totalCost,
             customerName: name,
-            customerPhone: phone,
+            customerPhone: phone.trim().split('').filter(n => !n.match(/[^0-9]/g)).join(''),
             customerEmail: email,
             orderStatus: 'Processing...',
         };
@@ -189,7 +189,7 @@ const CustomerDetailsForm = ({ cartItems }) => {
                         endIcon={<KeyboardArrowRightIcon />}
                         disabled={loading}
                     >
-                        Pay ${totalCost}
+                        Pay ${totalCost.toFixed(2)}
                     </Button>
                 </form>
             </div>
