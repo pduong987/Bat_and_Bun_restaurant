@@ -23,7 +23,8 @@ const TrackingForm = ({ setTrackResult }) => {
       setError('');
       setLoading(true);
 
-      axios.get(`/orders/${orderReference}?phone=${phone}`, {
+      // Send order reference instead of order id, and phone number (stripped) as query
+      axios.get(`/orders/${orderReference}?phone=${phone.trim().split('').filter(n => !n.match(/[^0-9]/g)).join('')}`, {
         headers: {
           'Content-Type': 'application/json'
         }

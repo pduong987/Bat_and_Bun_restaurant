@@ -6,7 +6,6 @@ import { subtotal, placeOrder } from '../../utils/cartOrderUtils';
 import { CART_REMOVE_ALL } from '../../reducers/constants.js';
 import { CartContext } from '../../contexts/CartContext';
 import axios from 'axios';
-// import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
 const CustomerDetailsForm = ({ cartItems }) => {
@@ -58,7 +57,7 @@ const CustomerDetailsForm = ({ cartItems }) => {
             cartItems: cartItems,
             totalCost: totalCost,
             customerName: name,
-            customerPhone: phone,
+            customerPhone: phone.trim().split('').filter(n => !n.match(/[^0-9]/g)).join(''),
             customerEmail: email,
             orderStatus: 'Processing...',
         };
@@ -189,7 +188,7 @@ const CustomerDetailsForm = ({ cartItems }) => {
                         endIcon={<KeyboardArrowRightIcon />}
                         disabled={loading}
                     >
-                        Pay ${totalCost}
+                        Pay ${totalCost.toFixed(2)}
                     </Button>
                 </form>
             </div>

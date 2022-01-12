@@ -21,6 +21,7 @@ const AdminMenuList = () => {
 
   useEffect(() => {
     (async () => {
+      // Get all items from db
       try {
         const { data } = await axios.get("/items");
         dispatch({ type: ITEMS_SUCCESS, payload: data });
@@ -29,6 +30,7 @@ const AdminMenuList = () => {
       }
     })();
     
+    // Get all available categories
     if (allItems.length > 0) {
       let cats = [];
       allItems.map(item => !cats.includes(item.category) && cats.push(item.category));
