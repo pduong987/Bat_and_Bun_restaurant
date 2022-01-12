@@ -19,6 +19,10 @@ const ItemForm = ({ setError, token, item }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Check if the form is called by AddNewItem or EditItem
+    // If item name is blank (cannot be blank on item creation),
+    // that means this will be AddNewItem
+    // else, it is EditItem
     if (item.name === '') {
       setAddItemForm(true);
     } else {
@@ -26,6 +30,7 @@ const ItemForm = ({ setError, token, item }) => {
     }
   }, [item]);
 
+  // Handler for image upload
   const fileChangeHandler = (e) => {
     setFileData(e.target.files[0]);
   };
@@ -36,10 +41,10 @@ const ItemForm = ({ setError, token, item }) => {
     try {
       setError('');
       setLoading(true);
-      console.log("file data ====>", fileData);
 
-      // If user doesn't upload image then use placeholder (or existing image), else use fileData
+      // If user doesn't upload image then use placeholder (or existing image)
       if (fileData === null) {
+        // If this is new item
         if(addItemForm) {
           const newItem = {
             name: title,
@@ -52,6 +57,7 @@ const ItemForm = ({ setError, token, item }) => {
   
           createItem(newItem, token);
         } else {
+          // If this is edit item
           const updatedItem = {
             ...item,
             name: title,
@@ -68,17 +74,14 @@ const ItemForm = ({ setError, token, item }) => {
     
         navigate("/dashboard/menu");
       } else {
+        // If user uploads image, use fileData
         const data = new FormData();
         data.append("image", fileData); // image key to use in Postman
 
         const server = "/upload/setItemImage";
 
-        console.log(`data: ${data}`);
-
         axios.post(`${server}`, data)
           .then((result) => {
-            console.log("File sent successfully", result);
-            console.log(`Image URL: ${result.data}`);
             setImage(result.data);
 
             if(addItemForm) {
@@ -188,6 +191,8 @@ const ItemForm = ({ setError, token, item }) => {
   )
 }
 
+// Need to set default empty object to indicate
+// if the form is called by AddNewItem or EditItem
 ItemForm.defaultProps = {
   setError: '',
   token: '',

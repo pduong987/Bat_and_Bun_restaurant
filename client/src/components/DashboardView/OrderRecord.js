@@ -6,7 +6,7 @@ import {
 import CartTable from '../CartTable';
 
 const OrderRecord = () => {
-  const { state } = useLocation();
+  const { state } = useLocation();  // contains all selected orders from AdminOrderList
 
   return (
     <div className="order-record">

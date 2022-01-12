@@ -18,6 +18,7 @@ const EditItem = () => {
 
   useEffect(() => {
     setLoading(true);
+    // Get the selected item to edit
     try {
       axios.get(`/items/${id}`)
       .then(res => {
@@ -25,7 +26,7 @@ const EditItem = () => {
         setLoading(false);
       });
     } catch (err) {
-      return (`Error retrieviing the menu item. Error: ${err}.`);
+      return (`Error retrieving the menu item. Error: ${err}.`);
     }
   }, [id]);
 
@@ -39,6 +40,7 @@ const EditItem = () => {
         {/* Show error */}
         {error && <Alert severity="error">{error}</Alert>}
         
+        {/* Call item form and populate input field with selected item records */}
         {!loading && item && 
           <ItemForm setError={setError} token={currentUser.accessToken} item={item} />
         }

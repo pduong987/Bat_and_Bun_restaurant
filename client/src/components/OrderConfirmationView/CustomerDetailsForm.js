@@ -6,7 +6,6 @@ import { subtotal, placeOrder } from '../../utils/cartOrderUtils';
 import { CART_REMOVE_ALL } from '../../reducers/constants.js';
 import { CartContext } from '../../contexts/CartContext';
 import axios from 'axios';
-// import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
 const CustomerDetailsForm = ({ cartItems }) => {
