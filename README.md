@@ -476,11 +476,17 @@ To run the development server, after installing the dependencies, go back in the
 
 &nbsp;  
 
-To run tests:
+To run tests for front-end, go to */client* directory then run:
 
 `npm run test`
 
-&nbsp;  
+&nbsp;
+
+To run tests for back-end, go to *root* directory then run:
+
+`npm run test`
+
+&nbsp;
 
 The front-end part of the project is all in */client* directory. The back-end part of the project is all in */server* directory. The app uses proxy to redirect call to the server.
 
@@ -512,91 +518,90 @@ The front-end part of the project is all in */client* directory. The back-end pa
   │   │   ├── logo512.png
   │   │   ├── manifest.json
   │   │   └── robots.txt
+  │   ├── src
+  │   │   ├── App.js
+  │   │   ├── components
+  │   │   │   ├── CartTable.js
+  │   │   │   ├── DashboardView
+  │   │   │   │   ├── AddNewItem.js
+  │   │   │   │   ├── AdminMenuList.js
+  │   │   │   │   ├── AdminOrderList.js
+  │   │   │   │   ├── EditItem.js
+  │   │   │   │   ├── ItemForm.js
+  │   │   │   │   ├── ListTable.js
+  │   │   │   │   └── OrderRecord.js
+  │   │   │   ├── Footer.js
+  │   │   │   ├── Header.js
+  │   │   │   ├── HomeView
+  │   │   │   │   ├── BusinessInfo.js
+  │   │   │   │   ├── EmbedMap.js
+  │   │   │   │   ├── HeroBanner.js
+  │   │   │   │   ├── IconLink.js
+  │   │   │   │   ├── MenuItemDetail.js
+  │   │   │   │   ├── MenuItemList.js
+  │   │   │   │   └── PartnerLinks.js
+  │   │   │   ├── OrderConfirmationView
+  │   │   │   │   └── CustomerDetailsForm.js
+  │   │   │   ├── PrivateRoute.js
+  │   │   │   ├── RightDrawer.js
+  │   │   │   └── TrackOrderView
+  │   │   │       ├── TrackResult.js
+  │   │   │       └── TrackingForm.js
+  │   │   ├── contexts
+  │   │   │   ├── AuthContext.js
+  │   │   │   ├── CartContext.js
+  │   │   │   ├── ItemContext.js
+  │   │   │   └── OrderContext.js
+  │   │   ├── firebase.js
+  │   │   ├── index.js
+  │   │   ├── index.scss
+  │   │   ├── reducers
+  │   │   │   ├── cartReducers.js
+  │   │   │   ├── constants.js
+  │   │   │   ├── itemReducer.js
+  │   │   │   └── orderReducer.js
+  │   │   ├── utils
+  │   │   │   ├── cartOrderUtils.js
+  │   │   │   └── itemUtils.js
+  │   │   └── views
+  │   │       ├── AboutView.js
+  │   │       ├── CartView.js
+  │   │       ├── DashboardView.js
+  │   │       ├── HomeView.js
+  │   │       ├── LoginView.js
+  │   │       ├── OrderConfirmationView.js
+  │   │       ├── ThankYouView.js
+  │   │       └── TrackOrderView.js
   │   ├── babel.config.js
   │   ├── package-lock.json
   │   ├── package.json
-  │   └── src
-  │       ├── App.js
-  │       ├── components
-  │       │   ├── CartTable.js
-  │       │   ├── DashboardView
-  │       │   │   ├── AddNewItem.js
-  │       │   │   ├── AdminMenuList.js
-  │       │   │   ├── AdminOrderList.js
-  │       │   │   ├── EditItem.js
-  │       │   │   ├── ItemForm.js
-  │       │   │   ├── ListTable.js
-  │       │   │   └── OrderRecord.js
-  │       │   ├── Footer.js
-  │       │   ├── Header.js
-  │       │   ├── HomeView
-  │       │   │   ├── BusinessInfo.js
-  │       │   │   ├── EmbedMap.js
-  │       │   │   ├── HeroBanner.js
-  │       │   │   ├── IconLink.js
-  │       │   │   ├── MenuItemDetail.js
-  │       │   │   ├── MenuItemList.js
-  │       │   │   └── PartnerLinks.js
-  │       │   ├── OrderConfirmationView
-  │       │   │   └── CustomerDetailsForm.js
-  │       │   ├── PrivateRoute.js
-  │       │   ├── RightDrawer.js
-  │       │   └── TrackOrderView
-  │       │       ├── TrackResult.js
-  │       │       └── TrackingForm.js
-  │       ├── contexts
-  │       │   ├── AuthContext.js
-  │       │   ├── CartContext.js
-  │       │   ├── ItemContext.js
-  │       │   └── OrderContext.js
-  │       ├── firebase.js
-  │       ├── index.js
-  │       ├── index.scss
-  │       ├── reducers
-  │       │   ├── cartReducers.js
-  │       │   ├── constants.js
-  │       │   ├── itemReducer.js
-  │       │   └── orderReducer.js
-  │       ├── utils
-  │       │   ├── cartOrderUtils.js
-  │       │   └── itemUtils.js
-  │       └── views
-  │           ├── AboutView.js
-  │           ├── CartView.js
-  │           ├── DashboardView.js
-  │           ├── HomeView.js
-  │           ├── LoginView.js
-  │           ├── OrderConfirmationView.js
-  │           ├── ThankYouView.js
-  │           └── TrackOrderView.js
-  ├── server
-  │   ├── config
-  │   │   └── firebase-config.js
-  │   ├── controllers
-  │   │   ├── itemController.js
-  │   │   ├── orderController.js
-  │   │   ├── paymentController.js
-  │   │   └── uploadController.js
-  │   ├── database.js
-  │   ├── index.js
-  │   ├── middleware
-  │   │   └── authMiddleware.js
-  │   ├── models
-  │   │   ├── itemModel.js
-  │   │   └── orderModel.js
-  │   ├── public
-  │   │   └── images
-  │   └── routes
-  │       ├── itemRoutes.js
-  │       ├── orderRoutes.js
-  │       ├── paymentRoutes.js
-  │       └── uploadRoutes.js
   ├── keys
   │   ├── firebaseAdminKey.json
   │   ├── firebaseClientKey.json
   │   └── firebaseDevAdminKey.json
   ├── package-lock.json
   ├── package.json
+  ├── server
+  │   ├── app.js
+  │   ├── config
+  │   │   └── firebase-config.js
+  │   ├── controllers
+  │   │   ├── itemController.js
+  │   │   ├── orderController.js
+  │   │   ├── paymentController.js
+  │   │   └── uploadController.js
+  │   ├── database.js
+  │   ├── index.js
+  │   ├── middleware
+  │   │   └── authMiddleware.js
+  │   ├── models
+  │   │   ├── itemModel.js
+  │   │   └── orderModel.js
+  │   └── routes
+  │       ├── itemRoutes.js
+  │       ├── orderRoutes.js
+  │       ├── paymentRoutes.js
+  │       └── uploadRoutes.js
   ├── Procfile
   └── README.md
   ```
