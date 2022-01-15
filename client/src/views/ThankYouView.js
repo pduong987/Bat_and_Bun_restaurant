@@ -2,14 +2,6 @@ import React, { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Container, Typography } from '@mui/material';
 
-const handlePaymentResult = (success, message) => {
-    if (!success) {
-        alert('Sorry it didnt work: ' + message);
-    } else {
-        alert(message);
-    }
-};
-
 const ThankYouView = () => {
     const { state } = useLocation();
     const navigate = useNavigate();

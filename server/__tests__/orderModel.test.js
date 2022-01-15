@@ -13,10 +13,6 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   const collections = await mongoose.connection.db.collections();
-
-  for (let collection of collections) {
-    await collection.deleteMany({});
-  }
 });
 
 test("Order model schema should be present", () => {
@@ -24,6 +20,5 @@ test("Order model schema should be present", () => {
 });
   
 afterAll(async () => {
-  await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
 });
