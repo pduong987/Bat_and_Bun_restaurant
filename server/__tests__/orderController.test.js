@@ -3,7 +3,7 @@ global.TextEncoder = require("util").TextEncoder;
 global.TextDecoder = require("util").TextDecoder;
 
 // importing the file that will be tested
-const orderController = require('./orderController');
+const orderController = require('../controllers/orderController');
   
 // testing the get order feature for errors
 test('get order or throw error', async () => {
