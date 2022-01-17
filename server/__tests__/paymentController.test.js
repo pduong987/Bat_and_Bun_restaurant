@@ -3,7 +3,7 @@ global.TextEncoder = require("util").TextEncoder;
 global.TextDecoder = require("util").TextDecoder;
 
 // importing the file that will be tested
-const orderController = require('./paymentController');
+const orderController = require('../controllers/paymentController');
   
 // testing the create payment feature for errors
 test('create payment or throw error', async () => {

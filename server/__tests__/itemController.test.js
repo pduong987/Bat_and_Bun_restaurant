@@ -3,7 +3,7 @@ global.TextEncoder = require("util").TextEncoder;
 global.TextDecoder = require("util").TextDecoder;
 
 // importing the file that will be tested
-const itemController = require('./itemController');
+const itemController = require('../controllers/itemController');
   
 // testing the get item feature for errors
 test('get item or throw error', async () => {
