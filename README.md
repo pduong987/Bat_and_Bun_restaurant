@@ -88,13 +88,13 @@ The website has to be easy to use by the customers, who should be able to see in
 
 &nbsp;  
 
-1. **Admin Dashboard**: The owner of the restaurant will sign in as administrator of the website and gain access to the Admin Dashboard. From here the owner will manage the menu (add and remove items, change the price of items), and will track the orders. Currently, only order that has been paid in full will be processed and displayed on the Admin Dashboard.
+1. **Admin Dashboard**: The owner of the restaurant will sign in as administrator of the website and gain access to the Admin Dashboard. From here the owner will manage the menu (add and remove items, change the price of items), and will track the orders. 
 
-2. **Image Upload**: Through the Admin Dashboard, the owner would be able to upload pictures of the menu items, through a form when creating or editing their menu items. Images are stored in AWS S3, with URL reference saved in MongoDB.
+2. **Image Upload**: Through the Admin Dashboard, the owner would be able to upload pictures of the menu items through a form when creating or editing the menu items. Images are stored in AWS S3, with URL reference saved in MongoDB.
 
-3. **No-Fuss Checkout**: The customers will have the option to view the menu and place an order without creating an account. We realised that it is easier and faster process if the customer is not required to make those additional steps to log in. We want the website to be easy and fast to use. So, once the customers are going to be ready to place an order, they will need to add their item to the cart, proceed to order confirmation page, and enter few personal details and credit card details through Stripe, and then place the order right away.
+3. **No-Fuss Checkout**: The customers will have the option to view the menu and place an order without creating an account. We realised that it is easier and faster process if the customer is not required to make those additional steps to log in. We want the website to be easy and fast to use. So, once the customers are going to be ready to place an order, they will need to add their item to the cart, proceed to order confirmation page, and enter few personal and payment details through Stripe, and then place the order right away.
 
-4. **Track Order Status**: After the customer place the order, they will receive a reference number which they will be able to use to get the status of their order through the tracking page. They will need to enter the order reference number as well as their phone number used during checkout to retrieve their order details so to reduce chances of random people checking other people's order details.
+4. **Track Order Status**: After the customers place the order, they will receive a reference number which they will be able to use to get the status of their order through the tracking page. They will need to enter the order reference number as well as their phone number used during checkout to retrieve their order details so to reduce chances of random people checking other people's order details.
 
 
 ### Target Audience
@@ -189,7 +189,7 @@ The web application for the Bat and Bun restaurant is developed using the MERN s
 <details>
   <summary>Admin Dashboard(Order List)</summary>
 
-  <p>Changes made: Swapped with Menu List as it is more make sense for admin to see Order List as soon as they log in. Using Material UI Data Grid instead of displaying each order in table format so order status updates on multiple orders can be made without having to navigate to a different page.</p>
+  <p>UPDATE: Swapped with Menu List as it makes more sense for admin to see Order List as soon as they log in. Using Material UI Data Grid instead of displaying each order in table format so order status updates on multiple orders can be made without having to navigate to a different page.</p>
 
   ![NEW Order List Wireframe](./docs/admin-order-list-page-new.jpeg)
 </details>
@@ -197,7 +197,7 @@ The web application for the Bat and Bun restaurant is developed using the MERN s
 <details>
   <summary>Admin Dashboard(Order Record)</summary>
 
-  <p>Changes made: An additional page, derived from original Order List wireframe, to display each order in detail.</p>
+  <p>UPDATE: An additional page, derived from original Order List wireframe, to display each order in detail.</p>
 
   ![Order Detail Wireframe](./docs/admin-order-record.jpg)
 </details>
@@ -223,7 +223,7 @@ The web application for the Bat and Bun restaurant is developed using the MERN s
 <details>
   <summary>Order Confirmation</summary>
 
-  <p>Changes made: Added missing payment form (elements provided by Stripe).</p>
+  <p>UPDATE: Added missing payment form (elements provided by Stripe).</p>
 
   ![NEW Order Confirmation Wireframe](./docs/order-confirmation-new.jpg)
 </details>
@@ -311,7 +311,7 @@ The web application for the Bat and Bun restaurant is developed using the MERN s
 
   ![Fail getOrder API Test with Postman](./docs/getOrder-FAIL.jpg)
 
-  <p>First attempt was fail due to wrong parameter used in Order controller. The controller was expecting order id, however the usage intention was to search specific order based on order reference number and phone number. After fixing the issue, below is the successful test screenshot.</p>
+  <p>First attempt was fail due to wrong parameter used in Order controller. The controller was expecting order id, however the usage intention was to search specific order based on order reference number and phone number. Below is the successful test screenshot, as it was after fixing the issue.</p>
 
   ![SUCCESS getOrder API Test with Postman](./docs/getOrder-SUCCESS.jpg)
 </details>
@@ -342,7 +342,7 @@ The web application for the Bat and Bun restaurant is developed using the MERN s
 
 &nbsp;  
 
-We were using Scrum with 1-week long per sprint. Stand up meetings were scheduled every Monday mornings of the week through Discord.
+We were using Scrum with 1-week long sprints. Stand up meetings were scheduled every Monday mornings of the week through Discord.
 
 &nbsp;  
 
@@ -495,8 +495,11 @@ The front-end part of the project is all in */client* directory. The back-end pa
 <details>
   <summary>Project directory tree:</summary>
 
-  ```bash
+```bash
   ├── client
+  │   ├── babel.config.js
+  │   ├── package-lock.json
+  │   ├── package.json
   │   ├── public
   │   │   ├── favicon.ico
   │   │   ├── img
@@ -518,63 +521,75 @@ The front-end part of the project is all in */client* directory. The back-end pa
   │   │   ├── logo512.png
   │   │   ├── manifest.json
   │   │   └── robots.txt
-  │   ├── src
-  │   │   ├── App.js
-  │   │   ├── components
-  │   │   │   ├── CartTable.js
-  │   │   │   ├── DashboardView
-  │   │   │   │   ├── AddNewItem.js
-  │   │   │   │   ├── AdminMenuList.js
-  │   │   │   │   ├── AdminOrderList.js
-  │   │   │   │   ├── EditItem.js
-  │   │   │   │   ├── ItemForm.js
-  │   │   │   │   ├── ListTable.js
-  │   │   │   │   └── OrderRecord.js
-  │   │   │   ├── Footer.js
-  │   │   │   ├── Header.js
-  │   │   │   ├── HomeView
-  │   │   │   │   ├── BusinessInfo.js
-  │   │   │   │   ├── EmbedMap.js
-  │   │   │   │   ├── HeroBanner.js
-  │   │   │   │   ├── IconLink.js
-  │   │   │   │   ├── MenuItemDetail.js
-  │   │   │   │   ├── MenuItemList.js
-  │   │   │   │   └── PartnerLinks.js
-  │   │   │   ├── OrderConfirmationView
-  │   │   │   │   └── CustomerDetailsForm.js
-  │   │   │   ├── PrivateRoute.js
-  │   │   │   ├── RightDrawer.js
-  │   │   │   └── TrackOrderView
-  │   │   │       ├── TrackResult.js
-  │   │   │       └── TrackingForm.js
-  │   │   ├── contexts
-  │   │   │   ├── AuthContext.js
-  │   │   │   ├── CartContext.js
-  │   │   │   ├── ItemContext.js
-  │   │   │   └── OrderContext.js
-  │   │   ├── firebase.js
-  │   │   ├── index.js
-  │   │   ├── index.scss
-  │   │   ├── reducers
-  │   │   │   ├── cartReducers.js
-  │   │   │   ├── constants.js
-  │   │   │   ├── itemReducer.js
-  │   │   │   └── orderReducer.js
-  │   │   ├── utils
-  │   │   │   ├── cartOrderUtils.js
-  │   │   │   └── itemUtils.js
-  │   │   └── views
-  │   │       ├── AboutView.js
-  │   │       ├── CartView.js
-  │   │       ├── DashboardView.js
-  │   │       ├── HomeView.js
-  │   │       ├── LoginView.js
-  │   │       ├── OrderConfirmationView.js
-  │   │       ├── ThankYouView.js
-  │   │       └── TrackOrderView.js
-  │   ├── babel.config.js
-  │   ├── package-lock.json
-  │   ├── package.json
+  │   └── src
+  │       ├── App.js
+  │       ├── components
+  │       │   ├── CartTable.js
+  │       │   ├── DashboardView
+  │       │   │   ├── AddNewItem.js
+  │       │   │   ├── AdminMenuList.js
+  │       │   │   ├── AdminOrderList.js
+  │       │   │   ├── EditItem.js
+  │       │   │   ├── ItemForm.js
+  │       │   │   ├── ListTable.js
+  │       │   │   └── OrderRecord.js
+  │       │   ├── Footer.js
+  │       │   ├── Header.js
+  │       │   ├── HomeView
+  │       │   │   ├── BusinessInfo.js
+  │       │   │   ├── EmbedMap.js
+  │       │   │   ├── HeroBanner.js
+  │       │   │   ├── IconLink.js
+  │       │   │   ├── MenuItemDetail.js
+  │       │   │   ├── MenuItemList.js
+  │       │   │   ├── PartnerLinks.js
+  │       │   │   └── __tests__
+  │       │   │       ├── BusinessInfo.test.js
+  │       │   │       ├── EmbedMap.test.js
+  │       │   │       ├── HeroBanner.test.js
+  │       │   │       ├── IconLink.test.js
+  │       │   │       └── __snapshots__
+  │       │   │           ├── BusinessInfo.test.js.snap
+  │       │   │           ├── EmbedMap.test.js.snap
+  │       │   │           ├── HeroBanner.test.js.snap
+  │       │   │           └── IconLink.test.js.snap
+  │       │   ├── OrderConfirmationView
+  │       │   │   ├── CustomerDetailsForm.js
+  │       │   │   └── customerDetailsForm.test.js
+  │       │   ├── PrivateRoute.js
+  │       │   ├── RightDrawer.js
+  │       │   └── TrackOrderView
+  │       │       ├── TrackResult.js
+  │       │       └── TrackingForm.js
+  │       ├── contexts
+  │       │   ├── AuthContext.js
+  │       │   ├── CartContext.js
+  │       │   ├── ItemContext.js
+  │       │   └── OrderContext.js
+  │       ├── firebase.js
+  │       ├── index.js
+  │       ├── index.scss
+  │       ├── reducers
+  │       │   ├── cartReducers.js
+  │       │   ├── constants.js
+  │       │   ├── itemReducer.js
+  │       │   └── orderReducer.js
+  │       ├── utils
+  │       │   ├── cartOrderUtils.js
+  │       │   └── itemUtils.js
+  │       └── views
+  │           ├── AboutView.js
+  │           ├── CartView.js
+  │           ├── DashboardView.js
+  │           ├── HomeView.js
+  │           ├── LoginView.js
+  │           ├── OrderConfirmationView.js
+  │           ├── ThankYouView.js
+  │           ├── TrackOrderView.js
+  │           └── __tests__
+  │               ├── AboutView.test.js
+  │               └── __snapshots__
+  │                   └── AboutView.test.js.snap
   ├── keys
   │   ├── firebaseAdminKey.json
   │   ├── firebaseClientKey.json
@@ -582,6 +597,13 @@ The front-end part of the project is all in */client* directory. The back-end pa
   ├── package-lock.json
   ├── package.json
   ├── server
+  │   ├── __tests__
+  │   │   ├── itemController.test.js
+  │   │   ├── itemModel.test.js
+  │   │   ├── orderController.test.js
+  │   │   ├── orderModel.test.js
+  │   │   ├── paymentController.test.js
+  │   │   └── routes.test.js
   │   ├── app.js
   │   ├── config
   │   │   └── firebase-config.js
@@ -618,13 +640,13 @@ List of packages (npm) used in this project.
 |Package|Description|
 |:---:|:---|
 |aws-sdk, multer, multer-s3|AWS SDK package, Multer (and its related packages) used for image upload to AWS S3.|
-|axios|Axios package used for http request between client and server.|
+|axios|Axios package used for http requests between client and server.|
 |babel and its related packages|Babel package used for JS transpiling.|
 |cors|Cors package used for Express middleware to enable Cross-Origin Resource Sharing.|
 |dotenv|DotEnv package used for loading environment variables automatically to the process.|
 |express|Express package used for routing in server.|
 |firebase and its related packages|Firebase package (and its related packages) used for authentication admin login to dashboard.|
-|mongoose|Mongoose package used as Object Data Modeling (ODM) library for NodeJS and MongoDB.|
+|mongoose|Mongoose package used as Object Data Modelling (ODM) library for NodeJS and MongoDB.|
 |mui and its related packages|Material UI package (and its related packages) used for front end element styling.|
 |nodemon|Nodemon package used for running front and back-end servers simultaneously.|
 |react-router-dom|Routing package used for dynamic routing in client (ReactJS) app.|
@@ -638,6 +660,6 @@ List of packages (npm) used in this project.
 
 Content and materials used in this app belong to Bat and Bun Vietnamese Restaurant.
 
-Image placeholders used are from Pixabay and/or Pexels, and are under Pixabay and/or Pexels lincenses which allow usage for commercial.
+Image placeholders used are from Pixabay and/or Pexels, and are under Pixabay and/or Pexels licenses which allow usage for commercial purposes.
 
 Team members: [Ana Lazarevska](https://github.com/aplazarevska), [Duong Pham](https://github.com/pduong987), [Jessica Gozali](https://github.com/petitejess).
