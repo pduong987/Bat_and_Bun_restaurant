@@ -1,8 +1,11 @@
+// requiring util for text encoder to avoid getting Text Encoder is not defined error
 global.TextEncoder = require("util").TextEncoder;
 global.TextDecoder = require("util").TextDecoder;
 
+// importing the file that will be tested
 const orderController = require('./orderController');
   
+// testing the get order feature for errors
 test('get order or throw error', async () => {
   expect.hasAssertions();
   try {
@@ -12,6 +15,7 @@ test('get order or throw error', async () => {
   }
 });
 
+// testing the find order by id feature for errors
 test('find order or throw error', async () => {
   expect.hasAssertions();
   try {
@@ -30,6 +34,7 @@ test('track order or throw error', async () => {
   }
 });
 
+// testing the track order feature for errors
 test('create order or throw error', async () => {
   expect.hasAssertions();
   try {
@@ -39,6 +44,7 @@ test('create order or throw error', async () => {
   }
 });
 
+// testing the update order feature for errors
 test('update order or throw error', async () => {
   expect.hasAssertions();
   try {
@@ -48,6 +54,7 @@ test('update order or throw error', async () => {
   }
 });
 
+// testing the delete order feature for errors
 test('delete order or throw error', async () => {
   expect.hasAssertions();
   try {

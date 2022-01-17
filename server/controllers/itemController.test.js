@@ -1,8 +1,11 @@
+// requiring util for text encoder to avoid getting Text Encoder is not defined error
 global.TextEncoder = require("util").TextEncoder;
 global.TextDecoder = require("util").TextDecoder;
 
+// importing the file that will be tested
 const itemController = require('./itemController');
   
+// testing the get item feature for errors
 test('get item or throw error', async () => {
   expect.hasAssertions();
   try {
@@ -12,6 +15,7 @@ test('get item or throw error', async () => {
   }
 });
 
+// testing the find item by id feature for errors
 test('find item by id or throw error', async () => {
   expect.hasAssertions();
   try {
@@ -21,6 +25,7 @@ test('find item by id or throw error', async () => {
   }
 });
 
+// testing the create item feature for errors
 test('create item or throw error', async () => {
   expect.hasAssertions();
   try {
@@ -30,6 +35,7 @@ test('create item or throw error', async () => {
   }
 });
 
+// testing the update item feature for errors
 test('update item or throw error', async () => {
   expect.hasAssertions();
   try {
@@ -39,15 +45,7 @@ test('update item or throw error', async () => {
   }
 });
 
-test('update order or throw error', async () => {
-  expect.hasAssertions();
-  try {
-    await Order.findByIdAndUpdate(req.params.id, req.body);
-  } catch (err) {
-    expect('err').toMatch('err');
-  }
-});
-
+// testing the delete item feature for errors
 test('delete item or throw error', async () => {
   expect.hasAssertions();
   try {
